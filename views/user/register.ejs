@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groco : sign up</title>
+
+    <!-- css links -->
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+
+    <!-- media queries -->
+    <link rel="stylesheet" href="/css/media.css" />
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- icon scout -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+
+  <body class="signUpPage subPage">
+    <div id="customPopup" class="popup">
+      <div class="popup-content">
+        <i class="fa-solid fa-check"></i>
+        <div class="message">
+          <span class="text text-1" id="text-1">Success</span>
+          <span class="text text-2" id="text-2"></span>
+        </div>
+        <span class="close-popup" id="popupCloseBtn">&times;</span>
+        <!-- <div class="progress" id="progress"></div> -->
+      </div>
+    </div>
+
+    <%- include('../partials/header') %>
+
+    <div class="main-container">
+      <div class="signUpForm userForm" id="signUp">
+        <div class="content">
+          <div class="title">
+            <!-- <div class="close-btn signUp-close-btn" onclick="closePopup('.signUpForm')">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </div> -->
+            <h2>Sign Up</h2>
+            <span>please sign up to continue</span>
+          </div>
+
+          <form id="signupForm" method="post">
+            <div class="data-field">
+              <div class="name">
+                <input
+                  type="text"
+                  id="firstName"
+                  name="first-name"
+                  placeholder="First Name"
+                  required
+                />
+                <input
+                  type="text"
+                  id="lastName"
+                  name="last-name"
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="data-field">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="data-field pass">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+                autocomplete="new-password"
+              />
+              <i class="uil uil-eye-slash toggle-password"></i>
+            </div>
+
+            <div
+              id="error-message"
+              style="
+                color: #e74c3c;
+                font-size: 0.9rem;
+                margin-top: 10px;
+                display: none;
+              "
+            ></div>
+
+            <button type="submit" class="sign-btn butn m-t">Sign up</button>
+
+            <div class="sign-up-with">
+              <h2><span>Or Sign up with</span></h2>
+              <div class="signUp-links">
+                <div class="link-1">
+                  <img
+                    src="../../images/google-logo.png"
+                    alt="Google Sign Up"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="log-in-link form-link" id="log-in-link">
+              <p>
+                Already have an account?
+                <a href="/login" id="go-to-login">Log in here</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/login_system.js"></script>
+  </body>
+</html>

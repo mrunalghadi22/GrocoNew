@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groco : Wishlist</title>
+
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/wishlist.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/mini-cart.css" />
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+</head>
+
+<body class="wishlistPage subPage">
+
+    <%- include('../partials/header') %>
+    <%- include('../partials/mini-cart') %>
+
+    <div id="customPopup" class="popup">
+        <div class="popup-content">
+            <i class="fa-solid fa-check"></i>
+            <div class="message">
+                <span class="text text-1" id="text-1">Success</span>
+                <span class="text text-2" id="text-2">Your profile has been updated.</span>
+            </div>
+            <span class="close-popup" id="popupCloseBtn">&times;</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="wishlist">
+            
+            <% if (typeof wishlist !== 'undefined' && wishlist.length > 0) { %>
+                <form action="" class="wishlist-form" method="post">
+                    <table class="wishlist-tabel">
+                        <thead>
+                            <tr>
+                                <th class="col_name">image</th>
+                                <th class="col_name">product name</th>
+                                <th class="col_name">price</th>
+                                <th class="col_name">Date Added</th>
+                                <th class="col_name">Stock Status</th>
+                                <th class="col_name">remove</th>
+                                <th class="col_name"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% wishlist.forEach(function(item) { %>
+                                <tr>
+                                    <td class="data">
+                                        <div class="prod-image">
+                                            <img src="<%= item.product.images[0] %>" alt="<%= item.name %>">
+                                        </div>
+                                    </td>
+                                    <td class="data">
+                                        <div class="prod-name">
+                                            <span data-id="<%= item.product._id %>"><%= item.product.name %></span>
+                                        </div>
+                                    </td>
+                                    <td class="data">
+                                        <div class="prod-price">
+                                            <i class="uil uil-rupee-sign"></i>
+                                            <p data-price="<%= item.product.price %>"><%= Number(item.product.price).toFixed(2) %></p>
+                                        </div>
+                                    </td>
+                                    <td class="data">
+                                        <div class="prod-date-added">
+                                            <p class="date"><%= new Date(item.createdAt).toLocaleDateString() %></p>
+                                        </div>
+                                    </td>
+                                    <td class="data">
+                                        <div class="prod-stock-status">
+                                            <p class="status"><%= item.product.stock_status %></p>
+                                        </div>
+                                    </td>
+                                    <td class="data">
+                                        <div class="prod-remove">
+                                            <button type="button" class="pro-rem-btn" onclick="removeFromWishlist(this)">&#10006</button>
+                                        </div>
+                                    </td>
+                                    <td class="data">
+                                        <div class="add-to-cart">
+                                            <button type="button" class="add-to-cart-btn butn" data-id="<%= item.product._id %>" onclick="sendProductDetails(event,this)">Add to Cart</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="action" colspan="7">
+                                    <div class="clear-wishlist">
+                                        <span>clear wishlist</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            <% } else { %>
+                <div class="empty-wishlist-container">
+                    <div class="image">
+                        <img src="/images/empty-cart.jpg" alt="Empty Wishlist">
+                    </div>
+                    <div class="content">
+                        <h2>Your Wishlist is Empty</h2>
+                        <p>Looks like you haven't added anything to your wishlist yet.</p>
+                        <a href="/shopping" class="shop-btn butn">Continue Shopping</a>
+                    </div>
+                </div>
+            <% } %>
+
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/mini-cart.js"></script>
+    <script src="/js/wishlist.js"></script>
+
+</body>
+</html>

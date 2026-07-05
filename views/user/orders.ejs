@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groco : My Profile</title>
+
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/mini-cart.css" />
+    <link rel="stylesheet" href="/css/orders.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+
+    <link rel="stylesheet" href="/css/media.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+
+  <body class="orderPage subPage">
+    <%- include('../partials/header') %> <%- include('../partials/mini-cart') %>
+
+    <div id="customPopup" class="popup">
+      <div class="popup-content">
+        <i class="fa-solid fa-check"></i>
+        <div class="message">
+          <span class="text text-1" id="text-1"></span>
+          <span class="text text-2" id="text-2"></span>
+        </div>
+        <span class="close-popup" id="popupCloseBtn">&times;</span>
+      </div>
+    </div>
+    <div class="main-container">
+      <% if (orders && orders.length > 0) { %>
+      <div class="orders">
+        <h2 class="title">My Orders (<%= orders.length %>)</h2>
+
+        <% orders.forEach(order => { %> <% const shortOrderId =
+        order._id.toString().slice(-6).toUpperCase(); %>
+
+        <div class="order-table" id="order-table-<%= order._id %>">
+          <table class="table">
+            <thead>
+              <tr class="column-names">
+                <th class="column-name">Order Id</th>
+                <th class="column-name">Total Payment</th>
+                <th class="column-name">Payment Method</th>
+                <th class="column-name">
+                  <%= order.order_status === 'Cancelled' ? 'Cancelled on' :
+                  'Order Date' %>
+                </th>
+              </tr>
+              <tr class="values">
+                <td class="value">#GROCO-<%= shortOrderId %></td>
+                <td class="value">₹ <%= order.total_price %></td>
+                <td class="value" style="text-transform: uppercase">
+                  <%= order.payment_method %>
+                </td>
+                <td class="value">
+                  <%= new Date(order.createdAt).toLocaleDateString('en-IN', {
+                  day: '2-digit', month: 'short', year: 'numeric' }) %>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <% order.items.forEach(item => { %> <% if (item.product_id) { %>
+              <tr class="product-row">
+                <td colspan="4" class="product-data">
+                  <div class="product-container">
+                    <img
+                      src='<%= item.product_id.images && item.product_id.images.length > 0 ? item.product_id.images[0] : "/images/default-product.png" %>'
+                      alt="<%= item.product_id.name %>"
+                    />
+                    <div class="product-content">
+                      <div class="p-name"><%= item.product_id.name %></div>
+                      <div class="w-q">
+                        <span class="p-quantity"
+                          ><%= item.quantity %> Qty.</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <% } %> <% }); %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4" class="table-footer">
+                  <div class="order-status" id="order-status-<%= order._id %>">
+                    <% if (order.order_status === 'Pending') { %>
+                    <div class="status Pending">Pending</div>
+                    <div class="text Pending">Your order is pending</div>
+                    <% } else if (order.order_status === 'Accepted') { %>
+                    <div class="status Accepted">Accepted</div>
+                    <div class="text Accepted">
+                      Your order has been accepted
+                    </div>
+                    <% } else if (order.order_status === 'Shipped') { %>
+                    <div class="status Shipped">Shipped</div>
+                    <div class="text Shipped">Your order is on the way</div>
+                    <% } else if (order.order_status === 'Delivered') { %>
+                    <div class="status Delivered">Delivered</div>
+                    <div class="text Delivered">
+                      Your order has been delivered
+                    </div>
+                    <% } else if (order.order_status === 'Cancelled') { %>
+                    <div class="status Cancelled">Cancelled</div>
+                    <div class="text Cancelled">
+                      Your order has been cancelled
+                    </div>
+                    <% } else { %>
+                    <div class="status Unknown">Unknown</div>
+                    <div class="text">Status not available</div>
+                    <% } %>
+                  </div>
+                  <% if (order.delivery_date && order.order_status !==
+                  'Cancelled' && order.order_status !== 'Delivered') { %>
+                  <div style="font-size: 0.9rem; margin-top: 8px; color: #555">
+                    <strong>Expected Delivery:</strong> <%= new
+                    Date(order.delivery_date).toLocaleDateString('en-IN', { day:
+                    '2-digit', month: 'short', year: 'numeric' }) %>
+                  </div>
+                  <% } else if (order.order_status === 'Delivered') { %>
+                  <div
+                    style="font-size: 0.9rem; margin-top: 8px; color: #27ae60"
+                  >
+                    <strong>Delivered on:</strong> <%= new
+                    Date(order.updatedAt).toLocaleDateString('en-IN', { day:
+                    '2-digit', month: 'short', year: 'numeric' }) %>
+                  </div>
+                  <% } %>
+                  <div class="actions">
+                    <div class="buttons">
+                      <a
+                        href="/orders/track/<%= order._id %>"
+                        class="butn track-order"
+                        >Track Order</a
+                      >
+                      <a
+                        href="/orders/invoice/<%= order._id %>"
+                        class="butn invoice"
+                        target="_blank"
+                        >Invoice</a
+                      >
+                    </div>
+                    <% if (order.order_status !== 'Cancelled' &&
+                    order.order_status !== 'Delivered') { %>
+                    <div
+                      class="cancel-order"
+                      onclick="cancelOrder('<%= order._id %>')"
+                    >
+                      Cancel Order
+                    </div>
+                    <% } %>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <% }); %>
+      </div>
+      <% } else { %>
+      <div class="no-orders">No Orders Found!</div>
+      <% } %>
+    </div>
+    <%- include('../partials/footer') %>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/mini-cart.js"></script>
+  </body>
+</html>

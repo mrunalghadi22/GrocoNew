@@ -1,0 +1,382 @@
+/* Basic Cart Page Styles */
+.cartPage .main-container {
+  background-color: #fff;
+}
+
+.groco-cart .row {
+  /* width: 100%; */
+  padding: 2.4rem 3%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 2rem;
+}
+
+.col-7 {
+  width: 70%;
+}
+
+.col-3 {
+  width: 30%;
+}
+
+.gorco-cart-form {
+  width: 100%;
+  /* padding: 0 10px 10px 10px; */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* border-radius: 20px; */
+}
+
+.groco-cart-tabel {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.groco-cart-tabel thead {
+  background-color: #f3f9f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.groco-cart-tabel thead th {
+  padding: 10px;
+  text-align: left;
+  color: var(--black);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.groco-cart-tabel tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.groco-cart-tabel td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.groco-cart-tabel td .prod-image img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.groco-cart-tabel td .prod-name span {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--black);
+  display: block;
+  max-width: 250px; /* Set this based on your design */
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+.groco-cart-tabel td .prod-weight span {
+  color: #626571;
+  font-weight: 400;
+}
+
+.groco-cart-tabel td .prod-price,
+.groco-cart-tabel td .prod-total-ammount {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  color: var(--black);
+  font-weight: 600;
+}
+
+.groco-cart-tabel td .prod-remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.groco-cart-tabel td .prod-remove button {
+  background-color: #e00000;
+  color: #fff;
+  border: none;
+  border: 1px solid #e00000;
+  padding: 2px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.groco-cart-tabel td .prod-remove button:hover {
+  background-color: #fff;
+  color: #e00000;
+}
+
+/* Cart Footer (for totals and checkout button) */
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  font-size: 1.1rem;
+}
+
+.cart-footer .total-price {
+  font-weight: bold;
+  color: #333;
+}
+
+.cart-footer .checkout-btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-footer .checkout-btn:hover {
+  background-color: #45a049;
+}
+
+/* Empty Cart State */
+.empty-cart {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #888;
+  padding: 40px;
+  font-weight: bold;
+}
+
+.groco-cart .groco-cart-tabel .action-butn-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.groco-cart .button {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 15px 20px;
+  letter-spacing: 0.16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.groco-cart .button:hover {
+  background-color: var(--black);
+}
+
+.action-butn-wrapper .coupn .input-text {
+  height: 48px;
+  width: 160px;
+  line-height: 40px;
+  margin-right: 10px;
+  padding: 15px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  border-radius: 30px;
+  font-size: 17px;
+  color: #626571;
+}
+
+.groco-cart .cart-summary {
+  padding: 15px;
+  width: 100%;
+  border: 2px solid var(--green);
+  border-radius: 6px;
+}
+
+.groco-cart .cart-summary .title {
+  font-size: 24px;
+  color: var(--black);
+  font-weight: 700;
+  padding-bottom: 10px;
+  /* border-bottom: 2px solid rgba(0, 0, 0, 0.1); */
+}
+
+.cart-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-summary-table th,
+.cart-summary-table td {
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.cart-summary-table th {
+  font-weight: 600;
+  font-size: 18px;
+  color: #626571;
+}
+
+.cart-summary-table td {
+  text-align: right;
+  color: var(--black);
+  font-weight: 700;
+}
+
+/* First row (excluding title) */
+.cart-summary-table tbody tr:first-child th,
+.cart-summary-table tbody tr:first-child td {
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Last row (Total row) */
+.cart-summary-table tbody tr:last-child th,
+.cart-summary-table tbody tr:last-child td {
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 12px;
+}
+.cart-summary-table .total td {
+  font-size: 18px;
+}
+
+.cart-summary-table .value {
+  font-size: 18px;
+  color: var(--black);
+}
+
+.cart-summary-table i {
+  color: var(--black);
+  font-size: 18px;
+  /* margin-right: 5px; */
+}
+
+.checkout-button {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.checkout-button a {
+  font-size: 18px;
+  color: #fff;
+}
+
+/* empty cart banner start */
+
+.empty-cart-field .banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 18px;
+  background-color: #f4f8ff;
+  border: 1px solid #007cba;
+  border-radius: 6px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.empty-cart-field .banner .fa-circle-exclamation {
+  color: #007cba;
+}
+
+.empty-cart-field .banner .text {
+  color: var(--black);
+}
+
+/* empty cart banner end */
+
+/* Popup Styling */
+/* .popup {
+  display: block; Hidden by default
+  position: fixed;
+  right: 30px;
+  top: 80px;
+  min-width: 300px;
+  background: #fff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  border-left: 6px solid var(--green);
+  border-radius: 12px;
+  overflow: hidden;
+  transform: translateX(calc(100% + 30px));
+  z-index: 1000;
+}
+
+.popup.active {
+  transform: translateX(calc(0%));
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  padding: 11px 35px 11px 25px;
+}
+
+.popup-content .fa-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  background-color: var(--green);
+  color: #fff;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.popup-content .message {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.popup-content .message .text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.popup-content .message .text.text-1 {
+  font-weight: 600;
+  color: #333;
+}
+
+.close-popup {
+  position: absolute;
+  top: -3px;
+  right: 5px;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #888;
+  opacity: 0.7;
+}
+
+.close-popup:hover {
+  opacity: 1;
+}
+
+.popup .progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: #ddd;
+}
+
+.popup .progress:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--green);
+}
+
+.progress.avtive:before {
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  100% {
+    right: 100%;
+  }
+} */

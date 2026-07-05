@@ -1,0 +1,609 @@
+.profilePage .main-container {
+  display: flex;
+  column-gap: 1.1rem;
+  background-color: var(--bg-color);
+}
+
+.sidebar {
+  width: 25%;
+}
+
+.sidebar .user {
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar .user .avatar {
+  width: 60px;
+  height: 60px;
+}
+
+.sidebar .user .avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.sidebar .user .name {
+  color: var(--black);
+}
+
+.sidebar .menu-items {
+  background-color: #fff;
+}
+
+.sidebar .menu-items ul .menu-item {
+  padding: 20px 10px;
+  font-size: 20px;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.sidebar .menu-items ul .menu-item:hover {
+  background-color: var(--green);
+  color: #fff;
+}
+
+.sidebar .menu-items ul .menu-item.active {
+  background-color: var(--green);
+  color: #fff;
+}
+
+.sidebar .menu-items ul .menu-item:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .menu-items ul .menu-item i {
+  font-size: 22px;
+  margin-right: 0.5rem;
+}
+
+.content {
+  width: 75%;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.pb-35 {
+  padding-bottom: 55px;
+}
+
+.user-profile-form {
+  width: 100%;
+}
+
+.content .user-profile-form .data-field {
+  width: 80%;
+  position: relative;
+}
+
+.content .user-profile-form .data-field .input-field {
+  /* width: 80%; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.content .user-profile-form .data-field .input-field.disabled {
+  cursor: not-allowed;
+}
+
+.content .data-field input[type="text"],
+.content .data-field input[type="email"],
+.content .data-field input[type="tel"],
+.content .data-field input[type="number"] {
+  /* padding: 18px 0 0 11px; */
+  text-transform: none;
+  padding: 16px;
+  font-size: 17px;
+  width: 300px;
+  height: 50px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Move label up when input is focused or contains text */
+.user-profile-form .data-field .input-field input:focus + label,
+.user-profile-form
+  .data-field
+  .input-field
+  input:not(:placeholder-shown)
+  + label {
+  top: 6px;
+  left: -10px;
+  font-size: 12px;
+  color: #333;
+}
+
+/* Hide the label when the input field contains data */
+.user-profile-form
+  .data-field
+  .input-field
+  input:not(:focus):not(:placeholder-shown)
+  + .pos-abs {
+  display: none;
+}
+
+.content .data-field input[type="text"]:focus,
+.content .data-field input[type="email"]:focus,
+.content .data-field input[type="tel"]:focus,
+.content .data-field input[type="number"]:focus {
+  border-color: var(--green);
+}
+
+.content .user-name {
+  display: flex;
+  gap: 1rem;
+}
+
+.content .title {
+  padding-bottom: 24px;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.pos-abs {
+  position: absolute;
+  top: 40%;
+  left: 0px;
+  transform: translateY(-50%);
+  padding: 18px 22px 0px 22px;
+  transition: top 0.3s ease, font-size 0.3s ease;
+  /* pointer-events: none; */
+}
+
+/* Styling for gender selection container */
+.data-field.gender {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+}
+
+/* Label styling */
+.data-field.gender label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #626571;
+}
+
+/* Gender options container */
+.gender-options {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Spacing between options */
+}
+
+/* Hide default radio button */
+.gender-options input[type="radio"] {
+  display: none;
+}
+
+/* Custom radio button */
+.gender-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--black);
+  position: relative;
+}
+
+/* Custom circle for radio */
+.gender-options label::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #555;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* Checked state styling */
+.gender-options input[type="radio"]:checked + label::before {
+  background-color: var(--green);
+  border-color: var(--green);
+  /* box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); */
+}
+
+/* Hover effect */
+.gender-options label:hover::before {
+  border-color: var(--green);
+}
+
+.readOnly {
+  pointer-events: none;
+}
+
+.hide {
+  display: none;
+}
+
+/* Popup Styling */
+.popup {
+  /* display: block; Hidden by default */
+  position: fixed;
+  right: 30px;
+  top: 80px;
+  min-width: 300px;
+  background: #fff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  border-left: 6px solid var(--green);
+  border-radius: 12px;
+  overflow: hidden;
+  transform: translateX(calc(100% + 30px));
+  z-index: 1000;
+}
+
+.popup.active {
+  transform: translateX(calc(0%));
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  padding: 11px 35px 11px 25px;
+}
+
+.popup-content .fa-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  background-color: var(--green);
+  color: #fff;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.popup-content .message {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.popup-content .message .text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.popup-content .message .text.text-1 {
+  font-weight: 600;
+  color: #333;
+}
+
+.close-popup {
+  position: absolute;
+  top: -3px;
+  right: 5px;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #888;
+  opacity: 0.7;
+}
+
+.close-popup:hover {
+  opacity: 1;
+}
+
+.popup .progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: #ddd;
+}
+
+.popup .progress:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--green);
+}
+
+.progress.avtive:before {
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  100% {
+    right: 100%;
+  }
+}
+
+.user-address {
+  width: 100%;
+}
+
+.address-form {
+  background-color: #f5faff;
+  display: none;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 1rem;
+}
+
+.address-form form {
+  width: 570px;
+}
+
+.address-form .form-title {
+  margin-bottom: 0.5rem;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--green);
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  column-gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.content .row .input-field {
+  width: 300px;
+}
+
+.content .row .input-field.textarea {
+  width: 100%;
+}
+
+.content .row input[type="text"],
+.content .row input[type="number"],
+.content .row select {
+  /* padding: 18px 0 0 11px; */
+  padding: 16px 16px 11px 16px;
+  font-size: 17px;
+  width: 100%;
+  height: 50px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.content .row textarea {
+  resize: none;
+  width: 100%;
+  padding: 16px;
+  font-size: 17px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.content .row input[type="text"]:focus,
+.content .row input[type="number"]:focus,
+.content .row textarea:focus {
+  border-color: var(--green);
+}
+
+/* Styling for gender selection container */
+.row.address-type {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+}
+
+/* Label styling */
+.row.address-type label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #626571;
+}
+
+/* Gender options container */
+.address-options {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Spacing between options */
+}
+
+/* Hide default radio button */
+.address-options input[type="radio"] {
+  display: none;
+}
+
+/* Custom radio button */
+.address-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--black);
+  position: relative;
+}
+
+/* Custom circle for radio */
+.address-options label::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #555;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* Checked state styling */
+.address-options input[type="radio"]:checked + label::before {
+  background-color: var(--green);
+  border-color: var(--green);
+  /* box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); */
+}
+
+/* Hover effect */
+.address-options label:hover::before {
+  border-color: var(--green);
+}
+
+.cancel {
+  background-color: transparent;
+  color: var(--green);
+}
+
+.cancel:hover {
+  background-color: transparent;
+}
+
+.add-address-btn {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  border-radius: 2px;
+  margin-bottom: 30px;
+}
+
+.add-address-btn .btn {
+  font-size: 17px;
+  color: var(--green);
+  font-weight: 500;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.add-address-btn .btn i {
+  margin: 0 16px;
+  vertical-align: middle;
+}
+
+.saved-address {
+  width: 100%;
+  background-color: #fff;
+}
+
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.address-card {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+ margin-bottom: 2 0px;
+}
+
+.address-info {
+  flex: 1;
+}
+
+.address-type .text {
+  padding: 3px 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #626571;
+  background-color: #ddd;
+}
+
+.user-info {
+  padding-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  display: flex;
+  column-gap: 20px;
+}
+
+.full-address {
+  padding-top: 10px;
+  font-size: 16px;
+  color: #626571;
+}
+
+.full-address .pincode {
+  color: var(--black);
+  font-weight: 700;
+}
+
+.address-actions {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.address-actions .edit-btn,
+.address-actions .delete-btn {
+  position: relative;
+  padding: 5px;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* outline: n; */
+  cursor: pointer;
+}
+
+.address-actions .edit-btn i,
+.address-actions .delete-btn i {
+  font-size: 16px;
+  color: #555;
+  opacity: 0.7;
+}
+
+.address-actions .edit-btn:hover,
+.address-actions .delete-btn:hover {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.address-actions .edit-btn:hover i,
+.address-actions .delete-btn:hover i {
+  opacity: 1;
+}
+
+.address-action-btn::after{
+  content: attr(data-tooltip);
+  padding: 3px 8px;
+  position: absolute;
+  top: 12%;
+  right: 145%;
+  background-color: var(--green);
+  color: #fff;
+  border-radius: 2px;
+  font-size: 13px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.address-action-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 104%; /* Position arrow just before tooltip */
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--green); /* Arrow pointing left */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Show tooltip on hover */
+.address-action-btn:hover::after,
+.address-action-btn:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+

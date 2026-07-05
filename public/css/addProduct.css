@@ -1,0 +1,130 @@
+.data-field {
+  width: 600px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-upload-container {
+  display: flex;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.image-box {
+  width: 80px;
+  height: 80px;
+  background: #ddd;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.image-box input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-box .preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.add-more {
+  background: #fff;
+  border: 2px dashed #aaa;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pricing-and-stock, .weight-and-category {
+  display: flex;
+  gap: 1rem;
+}
+
+.pricing-and-stock .input-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.data-field input[type="text"],
+.data-field input[type="number"],
+.data-field input[type="datetime-local"],
+.data-field select {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  padding-left: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.data-field input:focus,
+.data-field textarea:focus,
+.data-field select:focus {
+  border-color: var(--green);
+  /* box-shadow: 0px 0px 5px #2ecc71; */
+}
+
+/* Remove default arrows in number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.data-field textarea {
+  width: 100%;
+  outline: none;
+  padding-left: 10px;
+  padding-top: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  resize: none;
+}
+
+.data-field select {
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  appearance: none; /* For other browsers */
+  padding-right: 30px; /* Add some space for the custom icon */
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* .data-field .select-weight{
+  margin-bottom: 1.5rem;
+} */
+
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the custom arrow */
+.custom-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent the icon from interfering with select interactions */
+  font-size: 18px; /* Adjust size */
+}
+
+.weights-wrapper{
+    gap: 1rem;
+}
+

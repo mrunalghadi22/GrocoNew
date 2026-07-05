@@ -1,0 +1,135 @@
+.main-container {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  background-color: #fff;
+  padding: 20px 25px;
+  border-radius: 7px;
+  text-align: center;
+}
+
+.content .title {
+  /* height: 70px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem 0px;
+  /* border-bottom: 1px solid silver;     */
+  position: relative;
+}
+
+.userForm .content .title h2 {
+  font-size: 1.8rem;
+  color: #2c2c54;
+}
+
+.content .title p,
+p {
+  font-size: 1rem;
+  margin-top: 20px;
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.content span {
+  text-transform: none;
+  color: var(--black);
+  font-weight: 800;
+}
+
+p span {
+  color: var(--black);
+}
+
+p {
+  margin: 10px 0;
+}
+
+.forgot-password-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.content input[type="email"],
+.content input[type="password"],
+.content input[type="text"]:not(.code-input) {
+  text-transform: none;
+  height: 40px;
+  width: 100%;
+  padding: 0px 0px 0px 10px;
+  border-radius: 8px;
+  border: 1px solid silver;
+  outline: none;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.pass {
+  position: relative;
+}
+
+.pass .uil {
+  position: absolute;
+  right: 13px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: silver;
+  top: 15px;
+  cursor: pointer;
+}
+
+.form-link {
+  margin: 10px;
+  text-align: center;
+  color: var(--black);
+}
+
+.form-link a:hover {
+  text-decoration: underline;
+}
+
+.code-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.content .code-input[type="text"] {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.2rem;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.content button {
+  padding: 12px;
+  width: 100%;
+  background-color: var(--green);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--black);
+}
+
+.resend {
+  margin-top: 15px;
+  font-size: 0.85rem;
+}

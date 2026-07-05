@@ -1,0 +1,58 @@
+<div class="user-profile">
+    <form action="/profile/update" method="post" class="user-profile-form">
+        <div class="data-field personal-information pb-35">
+            <h2 class="title">Personal Information</h2>
+            <div class="user-name">
+                <div class="input-field">
+                    <label for="first-name">First Name</label>
+                    <input type="text" name="first-name" class="uName" id="first-name"
+                        value="<%= typeof user !== 'undefined' && user ? user.first_name : '' %>" placeholder="x" disabled>
+                </div>
+                <div class="input-field">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" name="last-name" class="uName" id="last-name"
+                        value="<%= typeof user !== 'undefined' && user ? user.last_name : '' %>" placeholder=" " disabled>
+                </div>
+            </div>
+
+            <div class="data-field gender">
+                <label>Gender</label>
+                <div class="gender-options">
+                    <input type="radio" name="gender" id="male" value="male"
+                        <%= (typeof user !== 'undefined' && user && user.gender === 'male') ? 'checked' : '' %> disabled>
+                    <label for="male">Male</label>
+
+                    <input type="radio" name="gender" id="female" value="female"
+                        <%= (typeof user !== 'undefined' && user && user.gender === 'female') ? 'checked' : '' %> disabled>
+                    <label for="female">Female</label>
+
+                    <input type="radio" name="gender" id="other" value="other"
+                        <%= (typeof user !== 'undefined' && user && user.gender === 'other') ? 'checked' : '' %> disabled>
+                    <label for="other">Other</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-field email-address pb-35">
+            <h2 class="title">Email Address</h2>
+            <div class="input-field">
+                <input type="email" name="email" id="email" class="user-email"
+                    value="<%= typeof user !== 'undefined' && user ? user.email : '' %>" placeholder=" " disabled>
+            </div>
+        </div>
+
+        <div class="data-field mobile-number pb-35">
+            <h2 class="title">Mobile Number</h2>
+            <div class="input-field">
+                <input type="tel" name="m-number" id="m-number" class="m-number"
+                    value="<%= typeof user !== 'undefined' && user ? user.phone : '' %>" pattern="[0-9]{10}" maxlength="10"
+                    autocomplete="tel" disabled>
+            </div>
+        </div>
+
+        <div class="action-butns">
+            <button type="button" class="butn update-profile">Update</button>
+            <button type="button" class="butn save-profile hide">Save</button>
+        </div>
+    </form>
+</div>

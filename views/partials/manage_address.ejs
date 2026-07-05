@@ -1,0 +1,128 @@
+<div class='user-address'>
+    <h2 class='title'>Manage Addresses</h2>
+
+    <div class='add-address-btn' onclick="showForm('add-address-btn')">
+        <div class='btn'>
+            <i class='fa-solid fa-plus'></i> Add New Address
+        </div>
+    </div>
+
+    <div class='address-form' style="display: none;"> <h4 class='form-title'>Add A New Address</h4>
+        <form action='/profile/address' method='post' class='addressForm'>
+            <input type='hidden' name='address_id' id='address-id' value=''>
+
+            <div class='row'>
+                <div class='input-field'>
+                    <input type='text' name='user-name' id='u-name' class='userName' placeholder='Name' required>
+                </div>
+                <div class='input-field'>
+                    <input type='number' name='mob-num' id='m-num' class='mobNum' placeholder='10-digit mobile number' required>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='input-field'>
+                    <input type='number' name='pincode' id='pin-code' class='pinCode' placeholder='Pincode' required>
+                </div>
+                <div class='input-field'>
+                    <input type='text' name='locality' id='locality' class='locality' placeholder='Locality' required>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='input-field textarea'>
+                    <textarea name='addressline1' id='addressline1' class='addressline1' rows='4'
+                        placeholder='Address (Area and Street)' required></textarea>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='input-field'>
+                    <input type='text' name='city' id='city' class='city' placeholder='City' required>
+                </div>
+                <div class='input-field'>
+                    <select name='state' id='state' required>
+                        <option value=''>--Select State--</option>
+                        <option value='maharashtra'>Maharashtra</option>
+                        <option value='goa'>Goa</option>
+                        <option value='delhi'>Delhi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class='row address-type'>
+                <label>Address Type</label>
+                <div class='address-options'>
+                    <input type='radio' name='address-type' id='home' value='Home' checked>
+                    <label for='home'>Home</label>
+                    <input type='radio' name='address-type' id='work' value='Work'>
+                    <label for='work'>Work</label>
+                </div>
+            </div>
+
+            <div class='action-butns row'>
+                <button type='submit' class='butn save-address' onclick='event.preventDefault(); handleAddress("save")'>Save</button>
+                <button type='submit' class='butn update-address' style='display:none'
+                    onclick='event.preventDefault(); handleAddress("update")'>Update</button>
+                <button type='button' class='butn cancel' onclick="hideForm('add-address-btn')">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class='saved-address'>
+        <h2 class='title'>Saved Addresses</h2>
+        <ul class='address-list' id='address-list'>
+            
+            <% if (typeof addresses !== 'undefined' && addresses.length > 0) { %>
+                
+                <% addresses.forEach(function(address) { %>
+                    <li class="address-item">
+                        <div class='address-card'>
+                            <div class='address-info'>
+                                <div class='address-type'>
+                                    <span class='text'><%= address.address_type.charAt(0).toUpperCase() + address.address_type.slice(1) %></span>
+                                    
+                                    <% if (address.is_default) { %>
+                                        <span class="badge" style="margin-left: 8px; font-size: 12px; background: #eee; padding: 2px 6px; border-radius: 4px;">Default</span>
+                                    <% } %>
+                                </div>
+                                <div class='user-info'>
+                                    <span class='name'><%= address.user_name %></span>
+                                    <span class='phone-number'><%= address.phn_num %></span>
+                                </div>
+                                <div class='full-address'>
+                                    <span class='address-line'><%= address.street_address %></span>,
+                                    <span class='locality'><%= address.locality %></span>,
+                                    <span class='city'><%= address.city %></span>,
+                                    <span class='state'><%= address.state %></span> -
+                                    <span class='pincode'><%= address.pin_code %></span>
+                                </div>
+                            </div>
+                            
+                            <div class='address-actions'>
+                                <button class='edit-btn address-action-btn' data-tooltip='Edit' onclick="editAddress('<%= address._id %>')">
+                                    <i class='uil uil-edit'></i>
+                                </button>
+                                
+                                <button class='delete-btn address-action-btn' data-tooltip='Delete' onclick="deleteAddress('<%= address._id %>')">
+                                    <i class='uil uil-trash-alt'></i>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                <% }) %>
+
+            <% } else { %>
+                
+                <div class="empty-address-msg" style="text-align: center; padding: 30px;">
+                    <img src="/images/empty-address.png" alt="No Addresses" style="max-width: 150px; opacity: 0.5; margin-bottom: 15px;">
+                    <p>You haven't saved any addresses yet.</p>
+                </div>
+
+            <% } %>
+
+        </ul>
+    </div>
+</div>
+</div>
+</div>

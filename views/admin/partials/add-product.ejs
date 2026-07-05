@@ -1,0 +1,115 @@
+<div class="add-product-container" style="padding: 20px;">
+    <form action="/admin/api/products/add" method="POST" enctype="multipart/form-data">
+        <div class="data-field">
+            <label for="image">Product Image:</label>
+            <div class="image-upload-container">
+                <div class="image-box">
+                    <input type="file" id="fileInput1" name="image1" accept="image/*" onchange="previewImage(event, 'preview1')" required>
+                    <img id="preview1" src="" alt="Upload" class="preview">
+                </div>
+            </div>
+        </div>
+        <div class="data-field">
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="data-field">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        <div class="data-field">
+            <label for="keywords">Keywords:</label>
+            <textarea id="keywords" name="keywords" rows="4" required></textarea>
+        </div>
+        <div class="data-field">
+            <div class="pricing-and-stock">
+                <div class="input-field">
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" step="0.01" required>
+                </div>
+                <div class="input-field">
+                    <label for="discount">Discount:</label>
+                    <input type="number" id="discount" name="discount" required>
+                </div>
+            </div>
+        </div>
+        <div class="data-field">
+            <label for="stock">Stock Quantity:</label>
+            <input type="number" id="stock" name="stock" required>
+        </div>
+        <div class="data-field">
+            <div class="select-weight">
+                <label for="product-weights">Product Weights (in g):</label>
+                <div class="weights-wrapper flex">
+                    <input type="text" name="weight1" value="">
+                    <input type="text" name="weight2" value="">
+                    <input type="text" name="weight3" value="">
+                    <input type="text" name="weight4" value="">
+                </div>
+            </div>
+        </div>
+        <div class="data-field">
+            <label for="weight-unit">Weight Unit</label>
+            <div class="custom-select-wrapper">
+                <select name="weight-unit" id="weight-unit" required>
+                    <option value="">Select Weight Unit</option>
+                    <option value="lit">lit</option>
+                    <option value="ml">ml</option>
+                    <option value="gm">gm</option>
+                    <option value="kg">kg</option>
+                </select>
+                <span class="custom-arrow"><i class="uil uil-angle-down"></i></span>
+            </div>
+        </div>
+        <div class="data-field">
+            <label for="category">Category:</label>
+            <div class="custom-select-wrapper">
+                <select id="category" name="category_id" required>
+                    <option value="">Select Category</option>
+                    <% if (typeof categories !== 'undefined' && categories.length > 0) { %>
+                        <% categories.forEach(cat => { %>
+                            <option value="<%= cat._id %>"><%= cat.category_name %></option>
+                        <% }); %>
+                    <% } %>
+                </select>
+                <span class="custom-arrow"><i class="uil uil-angle-down"></i></span>
+            </div>
+        </div>
+
+        <div class="data-field">
+            <label for="deal_start">Deal Start Date & Time:</label>
+            <input type="datetime-local" id="deal_start" name="deal_start">
+        </div>
+
+        <div class="data-field">
+            <label for="deal_end">Deal End Date & Time:</label>
+            <input type="datetime-local" id="deal_end" name="deal_end">
+        </div>
+
+        <div class="data-field">
+            <label for="deal-status">Deal status:</label>
+            <div class="custom-select-wrapper">
+                <select id="deal" name="deal-status">
+                    <option value="inactive">Inactive</option>
+                    <option value="active">Active</option>
+                    <option value="expired">Expired</option>
+                </select>
+                <span class="custom-arrow"><i class="uil uil-angle-down"></i></span>
+            </div>
+        </div>
+
+        <div class="data-field">
+            <label for="status">Status:</label>
+            <div class="custom-select-wrapper">
+                <select id="status" name="status">
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="disable">Disable</option>
+                </select>
+                <span class="custom-arrow"><i class="uil uil-angle-down"></i></span>
+            </div>
+        </div>
+
+        <button type="submit" class="butn addProduct">Add Product</button>
+    </form>
+</div>

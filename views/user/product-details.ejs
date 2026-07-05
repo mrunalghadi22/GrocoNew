@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= product.name %></title>
+
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/mini-cart.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/product-details.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+
+  <body class="productPage subPage">
+    <%- include('../partials/header') %> <%- include('../partials/mini-cart') %>
+
+    <div id="customPopup" class="popup">
+      <div class="popup-content">
+        <i class="fa-solid fa-check"></i>
+        <div class="message">
+          <span class="text text-1" id="text-1">Success</span>
+          <span class="text text-2" id="text-2"
+            >Your profile has been updated.</span
+          >
+        </div>
+        <span class="close-popup" id="popupCloseBtn">&times;</span>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <section class="product-details">
+        <div class="row">
+          <div class="col-4">
+            <div class="prod-image">
+              <img src="<%= product.images[0] %>" alt="<%= product.name %>" />
+            </div>
+          </div>
+
+          <% // Main Product Discount Calculation let discounted_price =
+          product.price; if (product.discount > 0) { discounted_price =
+          Math.floor(product.price - (product.price * (product.discount /
+          100))); } %>
+
+          <div class="col-5">
+            <div class="product-info">
+              <div class="prod-category">
+                <span
+                  class="category-name"
+                  data-category-id="<%= product.category_id %>"
+                >
+                  <%= product.category_name %>
+                </span>
+              </div>
+              <h3 class="prod-name" data-id="<%= product.pro_id %>">
+                <%= product.name %>
+              </h3>
+              <div class="prod-price">
+                <span class="actual-price" data-id="<%= product.price %>"
+                  >₹ <%= Number(product.price).toFixed(2) %></span
+                >
+                <span class="discounted-price"
+                  >₹ <%= discounted_price.toFixed(2) %></span
+                >
+                <span class="discount-tag">-<%= product.discount %>%</span>
+              </div>
+              <div class="line"></div>
+
+              <div class="prod-description"><%- product.description %></div>
+
+              <div class="product-actions">
+                <div class="quantity">
+                  <button type="button" class="decrement">-</button>
+
+                  <input
+                    type="number"
+                    class="quantity-input"
+                    value="1"
+                    min="1"
+                  />
+
+                  <button type="button" class="increment">+</button>
+                </div>
+                <div class="shop-butns">
+                  <% if (product.stock > 0) { %>
+
+                  <button
+                    type="button"
+                    class="shop-butn add-to-cart"
+                    data-id="<%= product._id %>"
+                    data-category-id="<%= product.category_id %>"
+                    onclick="addToCart(event, this)"
+                  >
+                    Add to Cart
+                  </button>
+
+                  <button
+                    type="button"
+                    class="shop-butn buy-now"
+                    onclick="buyNow(this, '<%= product._id %>')"
+                  >
+                    Buy Now
+                  </button>
+
+                  <% } else { %>
+
+                  <button
+                    type="button"
+                    class="shop-butn"
+                    disabled
+                    style="
+                      background-color: #cccccc;
+                      border-color: #cccccc;
+                      color: #666666;
+                      cursor: not-allowed;
+                    "
+                  >
+                    Out of Stock
+                  </button>
+
+                  <button
+                    type="button"
+                    class="shop-butn"
+                    disabled
+                    style="
+                      background-color: #e0e0e0;
+                      border-color: #e0e0e0;
+                      color: #888888;
+                      cursor: not-allowed;
+                    "
+                  >
+                    Unavailable
+                  </button>
+
+                  <% } %>
+                </div>
+              </div>
+              <div class="line"></div>
+              <div class="product-meta">
+                <span class="posted-in">
+                  category:
+                  <a
+                    href="/shopping?category=<%= encodeURIComponent(product.category_name) %>"
+                    ><%= product.category_name %></a
+                  >
+                </span>
+
+                <span class="tag-container">
+                  Tags:
+                  <div class="tags">
+                    <% if (typeof product.keywords !== 'undefined' &&
+                    product.keywords.length > 0) { %> <%
+                    product.keywords.forEach(function(tag, index) { %>
+                    <a href="/shopping?search=<%= encodeURIComponent(tag) %>"
+                      ><%= tag %></a
+                    ><%= index < product.keywords.length - 1 ? ', ' : '' %> <%
+                    }) %> <% } else { %> No tags available <% } %>
+                  </div>
+                </span>
+              </div>
+
+              <div
+                class="add-to-wishlist"
+                data-id="<%= product._id %>"
+                data-category-id="<%= product.category_id %>"
+                onclick="addToWishlist(event, this)"
+              >
+                <i class="uil uil-heart"></i>
+              </div>
+              <div class="line"></div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="product-features">
+              <div class="feature">
+                <i class="uil uil-truck"></i>
+                <span>Free worldwide shipping on all orders over $100</span>
+              </div>
+              <div class="feature">
+                <i class="uil uil-truck"></i>
+                <span>Guaranteed 100% Organic from natural farms</span>
+              </div>
+              <div class="feature">
+                <i class="uil uil-redo"></i>
+                <span>1 Day Returns if you change your mind</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="review-description">
+        <div class="tabs">
+          <button class="tab">Product Reviews</button>
+
+          <div class="line-wrap">
+            <span class="title-line"></span>
+            <span class="title-border"></span>
+          </div>
+        </div>
+
+        <div id="reviews" class="tab-content">
+          <% if(reviews && reviews.length > 0){ %> <% reviews.forEach(review =>
+          { %>
+
+          <div class="review">
+            <img src="/images/avatar.jpg" alt="User" />
+
+            <div class="review-content">
+              <%= name = review.user.first_name + " " + review.user.last_name %>
+              <strong><%= review.user.name %></strong>
+
+              <span class="review-date">
+                - <%= new Date(review.createdAt).toLocaleDateString() %>
+              </span>
+
+              <p class="comment"><%= review.review %></p>
+
+              <span class="stars">
+                <% for(let i=1;i<=5;i++){ %> <% if(i<=review.rating){ %>
+
+                <i class="fas fa-star"></i>
+
+                <% }else{ %>
+
+                <i class="far fa-star"></i>
+
+                <% } %> <% } %>
+              </span>
+            </div>
+          </div>
+
+          <% }) %> <% }else{ %>
+
+          <p>No reviews yet.</p>
+
+          <% } %>
+        </div>
+
+        <div class="review-form">
+          <form action="/product/<%= product._id %>/rating" method="POST">
+            <div class="rating">
+              <input type="radio" name="rating" id="star5" value="5" required />
+              <label for="star5">&#9733;</label>
+
+              <input type="radio" name="rating" id="star4" value="4" />
+              <label for="star4">&#9733;</label>
+
+              <input type="radio" name="rating" id="star3" value="3" />
+              <label for="star3">&#9733;</label>
+
+              <input type="radio" name="rating" id="star2" value="2" />
+              <label for="star2">&#9733;</label>
+
+              <input type="radio" name="rating" id="star1" value="1" />
+              <label for="star1">&#9733;</label>
+            </div>
+
+            <div class="input-field">
+              <textarea
+                name="review"
+                rows="7"
+                placeholder="Your review"
+                required
+              ></textarea>
+            </div>
+
+            <div class="row">
+              <div class="input-field">
+                <input
+                  type="text"
+                  value="<%= user ? user.name : '' %>"
+                  readonly
+                />
+              </div>
+
+              <div class="input-field">
+                <input
+                  type="email"
+                  value="<%= user ? user.email : '' %>"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="butn reviewBtn">Submit Review</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="similar-products">
+        <h1 class="heading">Related <span>Products</span></h1>
+        <div class="similar-products-wrapper">
+          <% if (typeof relatedProducts !== 'undefined' &&
+          relatedProducts.length > 0) { %> <%
+          relatedProducts.forEach(function(row) { %> <% let sim_discounted =
+          row.price; if (row.discount > 0) { sim_discounted =
+          Math.floor(row.price - (row.price * (row.discount / 100))); } %>
+          <div class="item" onclick="redirectToProduct('<%= row._id %>')">
+            <div class="actions">
+              <div
+                class="add-to-wishlist action_btn"
+                data-tooltip="Add To Wishlist"
+                data-id="<%= row._id %>"
+                data-category-id="<%= row.category_id %>"
+                onclick="addToWishlist(event, this)"
+              >
+                <i class="fa-regular fa-heart"></i>
+              </div>
+              <div class="view-product action_btn" data-tooltip="View Product">
+                <a href="/product-details?id=<%= row.pro_id %>" target="_blank">
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+              </div>
+            </div>
+            <span class="categoryName"><%= row.category_name %></span>
+            <div class="image">
+              <img src="<%= row.images[0] %>" alt="<%= row.name %>" />
+            </div>
+            <p
+              class="productPrice"
+              data-price="<%= sim_discounted.toFixed(2) %>"
+            >
+              <% if (row.discount > 0) { %>
+              <del>₹ <%= Number(row.price).toFixed(2) %></del>
+              <% } %> ₹ <%= sim_discounted.toFixed(2) %> <% if (row.discount >
+              0) { %>
+              <span class="discount-tag">-<%= row.discount %>%</span>
+              <% } %>
+            </p>
+            <h4 class="productName"><%= row.name %></h4>
+            <button
+              class="cartButn add-to-cart"
+              data-id="<%= row._id %>"
+              data-category-id="<%= row.category_id %>"
+              onclick="sendProductDetails(event, this)"
+            >
+              <i class="fa fa-basket-shopping"></i>
+              <span>Add to cart</span>
+            </button>
+          </div>
+          <% }) %> <% } else { %>
+          <p>No related products found.</p>
+          <% } %>
+        </div>
+      </section>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/mini-cart.js"></script>
+    <script src="/js/product_details.js"></script>
+  </body>
+</html>

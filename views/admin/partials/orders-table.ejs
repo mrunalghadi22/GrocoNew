@@ -1,0 +1,66 @@
+<div class="order-section">
+    <ul class="orders">
+        <% if (typeof orders !== 'undefined' && orders.length > 0) { %>
+            <% orders.forEach(order => { %>
+                <li class="order">
+                    <div class="box">
+                        <img src="/images/box.png" alt="">
+                    </div>
+                    <div class="order-content">
+                        <div class="row">
+                            <div class="order-id">#GROCO<%= order._id.toString().slice(-6).toUpperCase() %></div>
+                            <div class="total-items">Items : <%= order.total_items %></div>
+                            <div class="total-payment">₹ <%= order.total_price %></div>
+                            <div class="order-status">
+                                <select class="status-dropdown" data-id="<%= order._id %>" style="padding: 5px; border-radius: 4px;">
+                                    <option value="Pending" <%= order.order_status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="Processed" <%= order.order_status === 'Processing' ? 'selected' : '' %>>Processed</option>
+                                    <option value="Shipped" <%= order.order_status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                                    <option value="Delivered" <%= order.order_status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+                                    <option value="Cancelled" <%= order.order_status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="justify-content:flex-start; gap:2rem">
+                            <ul class="order-items">
+                                <% if (order.items && order.items.length > 0) { %>
+                                    <% order.items.forEach(item => { %>
+                                        <li class="order-item"><%= item.product_id ? item.product_id.name : 'Unknown Product' %></li>
+                                    <% }); %>
+                                <% } else { %>
+                                    <li class="order-item">No items</li>
+                                <% } %>
+                            </ul>
+                            
+                            <div class="payment-section">
+                                <div class="payment-method">Method : <%= order.payment_method.toUpperCase() %></div>
+                                <div class="payment-status">Payment : <%= order.payment_status %></div>
+                                <div class="order-date">
+                                    Date : <%= order.delivery_date ? new Date(order.delivery_date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Pending' %>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-address">
+                            <% if (order.address_id) { %>
+                                <div class="name"><%= order.address_id.user_name || order.address_id.first_name %></div>
+                                <div class="address">
+                                    <span class="street-address"><%= order.address_id.street_address %></span>,
+                                    <span class="location"><%= order.address_id.locality %></span>,
+                                    <span class="city"><%= order.address_id.city %></span>,
+                                    <span class="state"><%= order.address_id.state %> <span class="pincode">- <%= order.address_id.pin_code %></span></span>,
+                                    <span class="phn-num">Phone Number : <span class="number"><%= order.address_id.phn_num || order.address_id.mobile %></span></span>
+                                </div>
+                            <% } else { %>
+                                <div class="address" style="color: red;">Address details missing or deleted.</div>
+                            <% } %>
+                        </div>
+                    </div>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li class="order" style="justify-content: center; padding: 2rem;">No orders found.</li>
+        <% } %>
+    </ul>
+</div>

@@ -1,0 +1,210 @@
+.table-container {
+  width: 100%;
+  /* margin: 20px auto; */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background: #fff;
+}
+
+.table-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 25px;
+}
+
+.search-box {
+  display: flex;
+  width: 300px;
+  height: 40px;
+}
+
+.search-box .search-input {
+  width: 100%;
+  padding-left: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-box input:focus {
+  border: 1px solid var(--green);
+}
+
+.search-box .search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  background-color: var(--green);
+  color: #fff;
+  font-size: 1.5rem;
+  /* padding: 9px 8px 8px 10px; */
+  cursor: pointer;
+}
+
+.search-box .search-icon:hover {
+  background-color: var(--black);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  color: var(--black);
+}
+
+td.product-name {
+  width: 250px;
+}
+
+td img {
+  object-fit: contain;
+  width: 50px;
+  height: 50px;
+}
+
+th {
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.status-active {
+  color: green;
+}
+
+.status-pending {
+  color: orange;
+}
+
+.status-disable {
+  color: red;
+
+}
+.status-expired {
+  color: red;
+}
+
+.action-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative; /* Ensure the tooltip is positioned relative to this */
+  display: inline-block; /* Prevent unintended spacing */
+}
+
+.action-btn i {
+  font-size: 20px;
+  font-weight: 200;
+  opacity: 0.5;
+}
+
+.action-btn:not(:first-child) {
+  margin-left: 15px;
+}
+
+.action-btn:hover i {
+  opacity: 0.7;
+}
+
+/* Tooltip */
+.action-btn::after {
+  content: attr(data-tooltip);
+  padding: 5px 10px;
+  position: absolute;
+  bottom: 120%; /* Move tooltip above button */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  background-color: var(--green);
+  color: #fff;
+  border-radius: 5px;
+  font-size: 13px;
+  white-space: nowrap; /* Prevent text wrapping */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Arrow */
+.action-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 79%; /* Position arrow just below the tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--green) transparent transparent transparent; /* Arrow pointing up */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Show tooltip on hover */
+.action-btn:hover::after,
+.action-btn:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.editFormContainer {
+  display: none;
+  position: relative;
+  /* height: 70%; */
+  /* background: white; */
+  padding: 0 20px 20px 20px;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  position: relative; /* Ensure it stays centered */
+  /* overflow: scroll; */
+}
+
+.editFormContainer.active {
+  display: flex; /* Show when 'active' class is added */
+}
+
+.popUp .editFormContainer::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, Edge */
+}
+
+.editFormContainer .top{
+  position: relative;
+  padding: 5px;
+  position: sticky;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: end;
+}
+
+.close-form {
+  /* position: absolute;
+  top: 10px;
+  right: 10px; */
+  color: #333;
+  opacity: .6;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.close-form:hover {
+  opacity: .8;
+}
+
+.close-form i {
+  font-size: 20px;
+}
+

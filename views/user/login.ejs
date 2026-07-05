@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groco : login</title>
+
+  <!-- css links -->
+  <link rel="stylesheet" href="/css/utils.css" />
+  <link rel="stylesheet" href="/css/index.css" />
+  <link rel="stylesheet" href="/css/header.css" />
+  <link rel="stylesheet" href="/css/footer.css" />
+  <link rel="stylesheet" href="/css/mini-cart.css" />
+
+  <!-- media queries -->
+  <link rel="stylesheet" href="/css/media.css" />
+
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- icon scout -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+</head>
+
+<body class="logInPage subPage">
+
+  <div id="customPopup" class="popup">
+    <div class="popup-content">
+      <i class="fa-solid fa-check"></i>
+      <div class="message">
+        <span class="text text-1" id="text-1">Success</span>
+        <span class="text text-2" id="text-2"></span>
+      </div>
+      <span class="close-popup" id="popupCloseBtn">&times;</span>
+      <!-- <div class="progress" id="progress"></div> -->
+    </div>
+  </div>
+
+  <%- include('../partials/header') %>
+  <%- include('../partials/mini-cart') %>
+
+
+  <div class="main-container">
+    <div id="messageBox" class="message-box" style="display:none;"></div>
+    <div class="logInForm userForm">
+      <div class="content">
+        <div class="title">
+          <!-- <div class="close-btn logIn-close-btn" onclick="closePopup('.logInForm')">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </div> -->
+          <h2>log in</h2>
+          <span>please log in to continue</span>
+        </div>
+
+        <form action="" method="post" id="loginForm">
+          <div class="data-field">
+            <input type="text" name="email" placeholder=" email or mob. number" />
+            <div class="pass">
+              <input type="password" name="password" id="password" placeholder="Enter your password"   autocomplete="new-password"/>
+              <!-- <i class="uil uil-eye"></i> -->
+              <i class="uil uil-eye-slash toggle-password"></i>
+            </div>
+          </div>
+
+          <div class="f-pass" onclick="forgotPass()">forgot password?</div>
+
+          <button type="submit" class="login-btn butn">Login</button>
+          <!-- <div class="login-btn butn">Login</div> -->
+
+          <div class="sign-up-link form-link" id="sign-up-link">
+            <p>Not a member? <a href="/register" id="go-to-signUp">Sign up here</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+
+  <script src="/js/function.js"></script>
+  <script src="/js/login_system.js"></script>
+  <script src="/js/mini-cart.js"></script>
+
+</body>
+
+</html>

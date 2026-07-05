@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --green: #27ae60;
+  --black: #2c2c54;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  text-decoration: none;
+  list-style: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+
+html {
+  min-height: 100vh;
+  scroll-padding-top: 3rem;
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 2rem 3%;
+}
+
+.logo {
+  /* background-color: red; */
+  display: flex;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  padding: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.logo i {
+  padding-right: 0.5rem;
+  color: var(--green);
+}
+
+/* footer start */
+.footer {
+  text-transform: capitalize;
+  background-color: var(--black);
+  /* padding: 30px 9%; */
+  overflow: hidden;
+}
+
+.footer .box-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  /* border-bottom: 5px solid #fff;
+    padding-bottom: 1rem; */
+}
+
+.footer .box-container .box {
+  padding: 1rem 0;
+  width: 250px;
+}
+
+.footer .box-container .box .logo {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-left: -10px;
+}
+
+.footer .box-container .box p {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.footer .box-container .box .social-media {
+  padding-top: 1rem;
+}
+
+.footer .box-container .box .social-media a {
+  background-color: var(--green);
+  color: #fff;
+  padding: 0px;
+  height: 3rem;
+  width: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* .footer .box-container .box .social-media a:hover {
+  background-color: var(--black);
+} */
+
+.footer .box-container .box h3 {
+  color: var(--bluish-gray);
+  font-size: 1.5rem;
+}
+
+.footer .box-container .box ul {
+  padding-top: 1rem;
+}
+
+.footer .box-container .box ul li {
+  list-style: none;
+  line-height: 2rem;
+}
+
+.footer .box-container .box ul li a {
+  color: #fff;
+}
+
+.footer .box-container .box ul li a:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.footer .footer-bottom {
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  color: #fff;
+  padding: 10px 0 0 0;
+  border-top: 0.15rem solid var(--bluish-gray);
+  margin-top: 1rem;
+}
+/* footer end */

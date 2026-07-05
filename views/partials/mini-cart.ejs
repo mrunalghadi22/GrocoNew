@@ -1,0 +1,114 @@
+<div class="mini-cart-popup">
+  <div class="mini-cart-header">
+    <div class="text">
+      <i class="uil uil-shopping-cart-alt"></i>
+      <span>Your Cart</span>
+    </div>
+    <div class="clear-mini-cart">
+      <span onclick="clearMiniCart()">clear all</span>
+    </div>
+    <div class="close-mini-cart">
+      <i class="uil uil-times"></i>
+    </div>
+  </div>
+
+  <div class="mini-cart-content">
+    <% let total = 0; if (typeof cart !== 'undefined' && cart && cart.length >
+    0) { %>
+
+    <ul class="cart-items">
+      <% cart.forEach(function(item) { let product = item.product; let
+      actual_price = product.price || 0; let discount = product.discount || 0;
+      let discount_price = actual_price - (actual_price * discount / 100); let
+      quantity = item.quantity || 1; let total_price = discount_price *
+      quantity; total += total_price; let category_name = product.category ?
+      product.category.category_name : "Unknown"; let image = (product.images &&
+      product.images.length > 0) ? product.images[0] : (product.image1 || '');
+      %>
+      <li class="cart-item">
+        <img src="<%= image %>" alt="<%= product.name %>" />
+        <div class="cart-item-info">
+          <span class="category"><%= category_name %></span>
+          <h2 class="name"><%= product.name %></h2>
+          <span class="price" data-price="<%= total_price.toFixed(2) %>"
+            >₹ <%= total_price.toFixed(2) %></span
+          >
+
+          <div class="quantity">
+            <button class="decrement">-</button>
+            <button class="increment">+</button>
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              class="quantity-input"
+              data-id="<%= item._id %>"
+              value="<%= quantity %>"
+              min="1"
+            />
+          </div>
+
+          <div class="remove-from-cart"><i class="uil uil-trash-alt"></i></div>
+        </div>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <div class="empty-cart">
+      <div class="empty-cart-image">
+        <img src="/images/empty-cart.jpg" alt="Empty Cart" />
+      </div>
+      <h2>Ohhh... Your Cart is Empty</h2>
+      <p>But it doesn't have to be</p>
+      <div class="return-to-shop">
+        <a href="/shopping" class="butn shop-now">Shop Now</a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <div class="mini-cart-footer">
+    <div class="mini-cart-total">
+      <table cellspacing="0" class="cart-total-table">
+        <tbody>
+          <tr>
+            <th>
+              <span>Sub-Total</span>
+            </th>
+            <td>
+              <span class="sub-total">
+                <i class="uil uil-rupee-sign"></i><%= total > 0 ?
+                total.toFixed(2) : "0.00" %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span>Total</span>
+            </th>
+            <td>
+              <span class="total">
+                <i class="uil uil-rupee-sign"></i><%= total > 0 ?
+                total.toFixed(2) : "0.00" %>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mini-cart-actions">
+      <button
+        class="view-cart-button mini-cart-btn"
+        onclick="initOpenPage('/cart')"
+      >
+        View Cart
+      </button>
+
+      <button class="checkout-button mini-cart-btn" <%= total > 0 ? "" : "disabled" %> onclick="checkoutCart()"> 
+    Checkout 
+</button>
+    </div>
+  </div>
+</div>
+<div class="overlay"></div>

@@ -1,0 +1,204 @@
+.order-table {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.table thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+.table thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.order-table {
+  cursor: pointer;
+}
+
+.order-table .table thead {
+  background-color: var(--green);
+  color: #fff;
+  border: none;
+}
+
+.order-table .table thead tr {
+  padding: 0 10px;
+}
+
+.order-table .table thead tr th {
+  padding: 10px 10px 2px 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.order-table .table thead tr td.value {
+  padding: 0 10px 15px 10px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.order-table .table tbody .product-row {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.product-data {
+  width: 100%;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.product-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.product-container img {
+  padding: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.product-content {
+  flex-grow: 1;
+}
+
+.product-content .p-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.product-content .w-q {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  padding-top: 3px;
+}
+
+.w-q span:not(:last-child) {
+  border-right: 1px solid var(--text-light);
+  padding-right: 8px;
+  margin-right: 4px;
+}
+
+.table-footer {
+  width: 100%;
+  padding: 15px;
+  /* display: flex;
+    flex-direction: column;
+    row-gap: 1rem; */
+}
+
+.order-table tfoot tr td .order-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-table tfoot tr td .order-status .status {
+  padding: 2px 10px;
+  font-size: 15px;
+  border-radius: 25px;
+  font-weight: 700;
+}
+
+.status.Pending {
+  color: #f39c12; /* Orange */
+  background: rgba(243, 156, 18, 0.1);
+  border: 1px solid #f39c12;
+}
+
+.status.Accepted {
+  color: #2980b9; /* Blue */
+  background: rgba(41, 128, 185, 0.1);
+  border: 1px solid #2980b9;
+}
+
+.status.Shipped {
+  color: #27ae60; /* Green */
+  background: rgba(39, 174, 96, 0.1);
+  border: 1px solid #27ae60;
+}
+
+.status.Delivered {
+  color: #2ecc71; /* Light Green */
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid #2ecc71;
+}
+
+.status.Cancelled {
+  color: #e74c3c; /* Red */
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid #e74c3c;
+}
+
+.order-table tfoot tr td .order-status .text {
+  font-size: 15px;
+  /* color: var(--black); */
+}
+
+.text.Pending {
+  color: #f39c12; /* Orange */
+}
+.text.Accepted {
+  color: #2980b9; /* Blue */
+}
+.text.Cancelled {
+  color: #e74c3c; /* Red */
+}
+.text.Delivered {
+  color: #2ecc71; /* Light Green */
+}
+.text.Shipped {
+  color: #27ae60; /* Green */
+}
+
+.order-table tfoot tr td .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+
+.order-table tfoot tr td .actions .buttons {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.order-table tfoot tr td .actions .track-order,
+.order-table tfoot tr td .actions .invoice {
+  font-size: 17px;
+  border-radius: 25px;
+}
+
+.order-table tfoot tr td .actions .invoice {
+  background-color: #fff;
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+.order-table tfoot tr td .actions .invoice:hover {
+  background-color: var(--black);
+  color: #fff;
+  border: 1px solid var(--black);
+}
+
+.order-table tfoot tr td .actions .cancel-order {
+  padding: 3px 8px;
+  color: #e00000;
+  font-weight: 500;
+  background-color: var(--background-light);
+}

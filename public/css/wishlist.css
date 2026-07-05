@@ -1,0 +1,184 @@
+.wishlistPage .main-container {
+  background-color: #fff;
+}
+
+.wishlist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wishlist-form {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-tabel {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.wishlist-tabel thead {
+  background-color: #f3f9f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-tabel thead th {
+  padding: 10px;
+  text-align: left;
+  color: var(--black);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.wishlist-tabel tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-tabel td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.wishlist-tabel td .prod-image img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.wishlist-tabel td .prod-name span {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--black);
+  display: block;
+  max-width: 250px; /* Set this based on your design */
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+.wishlist-tabel td .prod-weight span {
+  color: #626571;
+  font-weight: 400;
+}
+
+.wishlist-tabel td .prod-price,
+.wishlist-tabel td .prod-date-added,
+.wishlist-tabel td .prod-stock-status {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  color: var(--black);
+  font-weight: 600;
+}
+
+.wishlist-tabel td .prod-remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wishlist-tabel td .prod-remove button {
+  background-color: #e00000;
+  color: #fff;
+  border: none;
+  border: 1px solid #e00000;
+  padding: 2px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.wishlist-tabel td .prod-remove button:hover {
+  background-color: #fff;
+  color: #e00000;
+}
+
+.wishlist-tabel tfoot .action {
+  text-align: right;
+}
+
+.clear-wishlist {
+  /* padding: 10px; */
+  cursor: pointer;
+}
+
+.clear-wishlist span {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.clear-wishlist span:hover {
+  color: var(--black);
+}
+
+/* wishlist footer start */
+
+/* wishlist footer end */
+
+/* Empty Cart Start */
+.empty-cart {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #888;
+  padding: 40px;
+  font-weight: bold;
+}
+
+.groco-cart .groco-cart-tabel .action-butn-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.groco-cart .button {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 15px 20px;
+  letter-spacing: 0.16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.groco-cart .button:hover {
+  background-color: var(--black);
+}
+
+.empty-wishlist-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-wishlist-container .image{
+  width: 300px;
+  height: 300px;
+}
+
+.empty-wishlist-container .image img{
+  width: 100%;
+  height: 100%;
+}
+
+.empty-wishlist-container .content {
+  text-align: center;
+  /* padding: 50px; */
+}
+
+.empty-wishlist-container .content h2 {
+  color: var(--black);
+}
+
+.empty-wishlist-container .content p {
+  color: #777;
+  font-size: 16px;
+  margin: 10px 0;
+}

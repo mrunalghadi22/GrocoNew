@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/checkout.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+
+  <body class="checkoutPage subPage">
+    <%- include('../partials/header') %>
+
+    <div id="customPopup" class="popup">
+      <div class="popup-content">
+        <i class="fa-solid fa-check"></i>
+        <div class="message">
+          <span class="text text-1" id="text-1"></span>
+          <span class="text text-2" id="text-2"></span>
+        </div>
+        <span class="close-popup" id="popupCloseBtn">&times;</span>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <div class="checkout-section">
+        <div class="checkout-details">
+          <div class="user-information">
+            <div class="top">
+              <i class="uil uil-user"></i>
+              <h2>User Information</h2>
+            </div>
+            <div class="data">
+              <div class="name">
+                <%= user.first_name %> <%= user.last_name %>
+              </div>
+              <div class="phn_num"><%= user.mob_num %></div>
+              <div class="email"><%= user.email %></div>
+            </div>
+          </div>
+
+          <div class="address-section">
+            <div class="top">
+              <i class="uil uil-truck"></i>
+              <h2>Delivery address</h2>
+            </div>
+
+            <div class="selected-address">
+              <div class="full-address"></div>
+              <div class="change-address-btn butn" onclick="changeAddress()">
+                Change
+              </div>
+            </div>
+
+            <div class="select-address">
+              <div class="addresses">
+                <% if (typeof addresses !== 'undefined' && addresses.length > 0)
+                { %> <% addresses.forEach(function(address) { %>
+                <div class="address">
+                  <input type="radio" name="saved_address" value="<%=
+                  address._id %>" onclick="displaySelectedAddress(this)" <%=
+                  address.is_default ? 'checked' : '' %> >
+
+                  <div class="address-info">
+                    <div class="address-type">
+                      <span class="text"><%= address.address_type %></span>
+                    </div>
+                    <div class="user-info">
+                      <span class="name"><%= address.user_name %></span>
+                      <span class="phone-number"><%= address.phn_num %></span>
+                    </div>
+                    <div class="full-address">
+                      <span class="address-line"
+                        ><%= address.street_address %></span
+                      >, <span class="locality"><%= address.locality %></span>,
+                      <span class="city"><%= address.city %></span>,
+                      <span class="state"><%= address.state %></span> -
+                      <span class="pincode"><%= address.pin_code %></span>
+                    </div>
+                    <div class="address-actions">
+                      <button
+                        class="edit-btn address-action-btn"
+                        data-tooltip="Edit"
+                        onclick='showForm(event, "add-address-btn", true, {
+                                            _id: "<%= address._id %>",
+                                            user_name: "<%= address.user_name %>",
+                                            phn_num: "<%= address.phn_num %>",
+                                            pin_code: "<%= address.pin_code %>",
+                                            locality: "<%= address.locality %>",
+                                            street_address: "<%= address.street_address %>",
+                                            city: "<%= address.city %>",
+                                            state: "<%= address.state %>",
+                                            address_type: "<%= address.address_type.toLowerCase() %>"
+                                        })'
+                      >
+                        <i class="uil uil-edit"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <% }) %> <% } else { %>
+                <p style="margin-bottom: 15px; color: #555">
+                  No saved addresses found. Please add one below.
+                </p>
+                <% } %>
+              </div>
+
+              <div
+                class="add-address-btn"
+                onclick="showForm(event, 'add-address-btn')"
+              >
+                <div class="btn">
+                  <i class="fa-solid fa-plus"></i> Add New Address
+                </div>
+              </div>
+
+              <div class="address-form" style="display: none">
+                <h4 class="form-title">Add A New Address</h4>
+                <form action="" method="post" class="addressForm">
+                  <input
+                    type="hidden"
+                    name="address_id"
+                    id="address-id"
+                    value=""
+                  />
+                  <div class="row">
+                    <div class="input-field">
+                      <input
+                        type="text"
+                        name="user-name"
+                        id="u-name"
+                        class="userName"
+                        placeholder="Name"
+                      />
+                    </div>
+                    <div class="input-field">
+                      <input
+                        type="number"
+                        name="mob-num"
+                        id="m-num"
+                        class="mobNum"
+                        placeholder="10-digit mobile number"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field">
+                      <input
+                        type="number"
+                        name="pincode"
+                        id="pin-code"
+                        class="pinCode"
+                        placeholder="Pincode"
+                      />
+                    </div>
+                    <div class="input-field">
+                      <input
+                        type="text"
+                        name="locality"
+                        id="locality"
+                        class="locality"
+                        placeholder="Locality"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field textarea">
+                      <textarea
+                        name="addressline1"
+                        id="addressline1"
+                        class="addressline1"
+                        rows="4"
+                        placeholder="Address (Area and Street)"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field">
+                      <input
+                        type="text"
+                        name="city"
+                        id="city"
+                        class="city"
+                        placeholder="City"
+                      />
+                    </div>
+                    <div class="input-field">
+                      <select name="state" id="state">
+                        <option value="">--Select State--</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="goa">Goa</option>
+                        <option value="delhi">Delhi</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row address-type">
+                    <label>Address Type</label>
+                    <div class="address-options">
+                      <input
+                        type="radio"
+                        name="address-type"
+                        id="home"
+                        value="Home"
+                      />
+                      <label for="home">Home</label>
+                      <input
+                        type="radio"
+                        name="address-type"
+                        id="work"
+                        value="Work"
+                      />
+                      <label for="work">Work</label>
+                    </div>
+                  </div>
+                  <div class="action-butns row">
+                    <button
+                      type="submit"
+                      class="butn save-address"
+                      onclick='event.preventDefault(); handleAddress("save")'
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="submit"
+                      class="butn update-address"
+                      style="display: none"
+                      onclick='event.preventDefault(); handleAddress("update")'
+                    >
+                      Update
+                    </button>
+                    <button
+                      type="button"
+                      class="butn cancel"
+                      onclick="hideForm('add-address-btn')"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="products-detail">
+            <div class="top">
+              <i class="fa fa-box"></i>
+              <h2>Your Products</h2>
+            </div>
+
+            <input
+              type="hidden"
+              id="product_id"
+              value="<%= reqQuery.product_id || '' %>"
+            />
+            <input
+              type="hidden"
+              id="quantity"
+              value="<%= reqQuery.quantity || '' %>"
+            />
+            <input type="hidden" id="isCart" value="<%= isCart %>" />
+
+            <div class="items-table">
+              <table>
+                <tbody>
+                  <% let subTotal = 0; checkoutItems.forEach(function(item) {
+                  let product = item.product; let price = product.price || 0;
+                  let discount = product.discount || 0; let discount_price =
+                  price - (price * discount / 100); subTotal += (discount_price
+                  * item.quantity); %>
+
+                  <tr>
+                    <th class="product-details">
+                      <img
+                        src="<%= item.product.images[0] %>"
+                        alt="<%= item.product.name %>"
+                      />
+                      <span><%= item.product.name %></span>
+                    </th>
+
+                    <td>₹ <%= discount_price.toFixed(2) %></td>
+                    <td>x<%= item.quantity %></td>
+                  </tr>
+
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="payment-method">
+            <div class="top">
+              <i class="uil uil-transaction"></i>
+              <h2>Select Payment Method</h2>
+            </div>
+            <div class="payment-options">
+              <label class="option">
+                <input type="radio" name="payment" id="upi" value="upi" />
+                <span>UPI</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="payment" id="paypal" value="paypal" />
+                <span>PayPal</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="payment" id="cod" value="cod" />
+                <span>Cash on Delivery</span>
+              </label>
+
+              <button
+                class="payment-btn butn"
+                name="pay_now"
+                onclick="processPayment(<%= subTotal %>)"
+              >
+                Proceed to Payment
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <div class="order-summary-content">
+            <div class="title">
+              <h3>Order Summary</h3>
+            </div>
+            <div class="order-summary-table">
+              <table>
+                <tr>
+                  <th>Total Items:</th>
+                  <td><%= totalItems %></td>
+                  <input
+                    type="hidden"
+                    id="total_items"
+                    name="total_items"
+                    value="<%= totalItems %>"
+                  />
+                </tr>
+                <tr>
+                  <th>Subtotal:</th>
+                  <td>₹ <%= subTotal.toFixed(2) %></td>
+                </tr>
+                <tr>
+                  <th>Shipping:</th>
+                  <td>Free</td>
+                </tr>
+                <tr class="total">
+                  <th><strong>Total:</strong></th>
+                  <td>
+                    <span class="total-price" id="totalAmount"
+                      >₹ <%= subTotal.toFixed(2) %></span
+                    >
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script>
+    window.checkoutItems = <%- JSON.stringify(checkoutItems || []) %>;
+    
+    console.log("🛒 Items beautifully formatted by controller:", window.checkoutItems);
+</script>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/checkout.js"></script>
+  </body>
+</html>

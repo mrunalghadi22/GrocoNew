@@ -1,0 +1,235 @@
+<div class="sub-header">
+  <div class="desktop-header header">
+    <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>groco</a>
+
+    <form class="search-box" method="GET" action="/shopping">
+      <div class="category">
+        <div class="cat-btn-wrap">
+          <button class="cat-toggel" id="dropDownMenuButton1" type="button">
+            <span class="cat-label">
+              <%= (typeof currentCategory !== 'undefined' && currentCategory) ?
+              currentCategory : 'All Categories' %>
+            </span>
+            <span class="icon">
+              <i class="uil uil-angle-down"></i>
+            </span>
+          </button>
+        </div>
+
+        <ul class="dropdown-category-list">
+          <li data-slug="All Categories">
+            <span>All Categories</span>
+          </li>
+
+          <% if (locals.categories && locals.categories.length > 0) { %> <%
+          locals.categories.forEach(function(cat) { %>
+
+          <li data-slug="<%= cat.category_name %>">
+            <span><%= cat.category_name %></span>
+          </li>
+
+          <% }) %> <% } %>
+        </ul>
+      </div>
+
+      <input
+        type="hidden"
+        name="category"
+        value="<%= typeof currentCategory !== 'undefined' ? currentCategory : '' %>"
+      />
+      <input
+        type="text"
+        class="search-input"
+        name="search"
+        placeholder="Type Your Products..."
+        value="<%= typeof currentSearch !== 'undefined' ? currentSearch : '' %>"
+      />
+      <button type="submit" class="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i> Search
+      </button>
+    </form>
+
+    <div class="icons">
+      <div class="signUp-box" id="signUp-box">
+        <% if (typeof user !== 'undefined' && user) { %>
+        <div class="btn">
+          <i class="uil uil-user-circle"></i>
+          <span><%= user.name %></span>
+          <i class="uil uil-angle-down"></i>
+        </div>
+        <div class="dropdown">
+          <ul>
+            <li>
+              <a href="/profile"
+                ><i class="uil uil-user-circle"></i> My Profile</a
+              >
+            </li>
+            <li>
+              <a href="/orders"><i class="uil uil-archive"></i> Orders</a>
+            </li>
+            <li>
+              <a href="/wishlist"><i class="uil uil-heart"></i> Wishlist</a>
+            </li>
+            <li>
+              <a href="/logout"><i class="uil uil-sign-out-alt"></i> Logout</a>
+            </li>
+          </ul>
+        </div>
+        <% } else { %>
+        <div
+          class="btn login-link"
+          id="login-link"
+          name="loginLink"
+          onclick="openLogin()"
+        >
+          <i class="uil uil-user-circle"></i>
+          <span>Login</span>
+          <i class="uil uil-angle-down"></i>
+        </div>
+        <div class="dropdown">
+          <div class="sign-up" onclick="openSignUp()">
+            <span>New customer?</span>
+            <a href="#" class="sign-up-link" id="sign-up-link">Sign Up</a>
+          </div>
+          <ul>
+            <li>
+              <a href="/profile"
+                ><i class="uil uil-user-circle"></i> My Profile</a
+              >
+            </li>
+            <li>
+              <a href="/orders"><i class="uil uil-archive"></i> Orders</a>
+            </li>
+            <li>
+              <a href="/wishlist"><i class="uil uil-heart"></i> Wishlist</a>
+            </li>
+          </ul>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="cart-box" id="cart-box">
+        <div class="btn cart-link">
+          <i class="uil uil-shopping-cart-alt"></i>
+          <span>cart</span>
+        </div>
+      </div>
+    </div>
+    <div id="menu-bar" class="fas fa-bars"></div>
+  </div>
+
+  <div class="mobile-header header">
+    <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>groco</a>
+
+    <div class="search-box-div">
+      <form class="search-box" method="GET" action="/shopping">
+        <div class="category">
+          <div class="cat-btn-wrap">
+            <button class="cat-toggel" id="dropDownMenuButton2" type="button">
+              <span class="cat-label">All Categories</span>
+              <span class="icon">
+                <i class="uil uil-angle-down"></i>
+              </span>
+            </button>
+          </div>
+          <ul class="dropdown-category-list">
+            <li data-slug="All Categories">
+              <span>All Categories</span>
+            </li>
+            <% if (typeof categories !== 'undefined' && categories.length > 0) {
+            %> <% categories.forEach(function(cat) { %>
+            <li data-slug="<%= cat.category_name %>">
+              <span><%= cat.category_name %></span>
+            </li>
+            <% }) %> <% } %>
+          </ul>
+        </div>
+        <div class="input-grp">
+          <input
+            type="hidden"
+            name="category"
+            value="<%= typeof currentCategory !== 'undefined' ? currentCategory : '' %>"
+          />
+          <input
+            type="text"
+            class="search-input"
+            name="search"
+            placeholder="Type Your Products..."
+            value="<%= typeof currentSearch !== 'undefined' ? currentSearch : '' %>"
+          />
+          <button type="submit" class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="icons">
+      <div class="search-icon btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+
+      <div class="signUp-box" id="signUp-box">
+        <% if (typeof user !== 'undefined' && user) { %>
+        <div class="btn">
+          <i class="uil uil-user-circle"></i>
+          <span><%= user.first_name %></span>
+          <i class="uil uil-angle-down"></i>
+        </div>
+        <div class="dropdown">
+          <ul>
+            <li>
+              <a href="/profile"
+                ><i class="uil uil-user-circle"></i> My Profile</a
+              >
+            </li>
+            <li>
+              <a href="/orders"><i class="uil uil-archive"></i> Orders</a>
+            </li>
+            <li>
+              <a href="/wishlist"><i class="uil uil-heart"></i> Wishlist</a>
+            </li>
+            <li>
+              <a href="/logout"><i class="uil uil-sign-out-alt"></i> Logout</a>
+            </li>
+          </ul>
+        </div>
+        <% } else { %>
+        <div
+          class="btn login-link"
+          id="login-link"
+          name="loginLink"
+          onclick="openLogin()"
+        >
+          <i class="uil uil-user-circle"></i>
+        </div>
+        <div class="dropdown">
+          <div class="sign-up" onclick="openSignUp()">
+            <span>New customer?</span>
+            <a href="#" class="sign-up-link" id="sign-up-link">Sign Up</a>
+          </div>
+          <ul>
+            <li>
+              <a href="/profile"
+                ><i class="uil uil-user-circle"></i> My Profile</a
+              >
+            </li>
+            <li>
+              <a href="/orders"><i class="uil uil-archive"></i> Orders</a>
+            </li>
+            <li>
+              <a href="/wishlist"><i class="uil uil-heart"></i> Wishlist</a>
+            </li>
+          </ul>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="cart-box" id="cart-box">
+        <div class="btn cart-link">
+          <i class="uil uil-shopping-cart-alt"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

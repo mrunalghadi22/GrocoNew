@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groco : Shop</title>
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/mini-cart.css" />
+    <link rel="stylesheet" href="/css/shopping.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <!-- <link rel="stylesheet" href="../assets/css/media.css" /> -->
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <!-- Icon Scout -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+
+  <body class="shoppingPage subPage">
+    <%- include('../partials/header') %> <%- include('../partials/mini-cart') %>
+
+    <div id="customPopup" class="popup">
+      <div class="popup-content">
+        <i class="fa-solid fa-check"></i>
+        <div class="message">
+          <span class="text text-1" id="text-1">Success</span>
+          <span class="text text-2" id="text-2"
+            >Your profile has been updated.</span
+          >
+        </div>
+        <span class="close-popup" id="popupCloseBtn">&times;</span>
+      </div>
+    </div>
+
+    <div class="main-container" style="min-height: 90vh">
+      <div class="shopping">
+        <!-- Categories Section -->
+        <div class="category-container">
+          <div class="heading-container">
+            <div class="title-holder">
+              <div class="title-wrap">
+                <h1>All categories</h1>
+              </div>
+              <div class="line-wrap">
+                <span class="title-line"></span>
+                <span class="title-border"></span>
+              </div>
+            </div>
+          </div>
+          <ul class="categories">
+            <% categories.forEach(category=>{ %>
+
+            <li class="category-item">
+              <a
+                href="/shopping?category=<%= encodeURIComponent(category.category_name) %>"
+              >
+                <i class="fa <%= category.icon_class %> category-icon"></i>
+                <span><%= category.category_name %></span>
+              </a>
+            </li>
+
+            <% }) %>
+          </ul>
+        </div>
+
+        <div class="product-main-container" id="product-main-container">
+          <!-- product categories -->
+          <% if(selectedCategory){ %>
+
+          <div class="product-categories">
+            <div class="h3">Product Category:</div>
+
+            <div class="categorie">
+              <span><%= selectedCategory %></span>
+              <a href="/shopping">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </a>
+            </div>
+          </div>
+
+          <% } %>
+
+          <!-- Products Section -->
+          <div class="products-container">
+            <% if(products.length){ %> <% products.forEach(product=>{ %> <%
+            const discountedPrice = product.discount > 0 ?
+            Math.floor(product.price - (product.price * product.discount / 100))
+            : product.price; %>
+
+            <div class="item" onclick="redirectToProduct('<%= product._id %>')">
+              <div class="actions">
+                <div
+                  class="add-to-wishlist action_btn"
+                  data-tooltip="Add To Wishlist"
+                  data-id="<%= product._id %>"
+                  onclick="addToWishlist(event,this)"
+                >
+                  <i class="fa-regular fa-heart"></i>
+                </div>
+
+                <div
+                  class="view-product action_btn"
+                  data-tooltip="View Product"
+                >
+                  <a href="/product/<%= product._id %>" target="_blank">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                </div>
+              </div>
+              <span class="categoryName">
+                <%= product.category.category_name %>
+              </span>
+
+              <div class="image">
+                <img src="<%= product.images[0] %>" alt="<%= product.name %>" />
+              </div>
+
+              <div class="productPrice">
+                <div class="price">
+                  <% if(product.discount>0){ %>
+
+                  <del>₹ <%= product.price %></del>
+
+                  <% } %> ₹ <%= discountedPrice %>
+                </div>
+
+                <% if(product.discount>0){ %>
+
+                <span class="discount-tag"> -<%= product.discount %>% </span>
+
+                <% } %>
+              </div>
+
+              <h4 class="productName"><%= product.name %></h4>
+
+              <% if (product.stock > 0) { %>
+              <button
+                class="cartButn add-to-cart"
+                data-id="<%= product._id %>"
+                onclick="sendProductDetails(event, this)"
+              >
+                <i class="fa fa-basket-shopping"></i>
+                <span>Add to cart</span>
+              </button>
+              <% } else { %>
+              <button
+                class="cartButn add-to-cart"
+                disabled
+                style="
+                  background-color: #cccccc;
+                  border-color: #cccccc;
+                  color: #666666;
+                  cursor: not-allowed;
+                "
+              >
+                <i class="fa fa-ban"></i>
+                <span>Out of stock</span>
+              </button>
+              <% } %>
+            </div>
+
+            <% }) %> <% }else{ %>
+
+            <h2>No products found.</h2>
+
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/mini-cart.js"></script>
+    <!-- <script src="/js/shopping.js"></script> -->
+  </body>
+</html>

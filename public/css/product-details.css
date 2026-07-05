@@ -1,0 +1,531 @@
+.productPage .main-container {
+  background-color: #fff;
+  padding: 0;
+}
+
+.productPage section {
+  padding: 2rem 3%;
+}
+
+/* .product-details {
+  min-height: 100vh;
+} */
+
+.product-details .row {
+  display: flex;
+  /* column-gap: 0.2rem; */
+}
+
+.col-4,
+.col-5,
+.col-3 {
+  padding: 8px;
+}
+
+.col-4 {
+  width: 40%;
+}
+
+.col-5 {
+  width: 60%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+/* Styling for the product image */
+.prod-image {
+  width: 100%; /* Make the container full width */
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.prod-image img {
+  width: 100%; /* Make image fill the container */
+  height: 100%; /* Fill container height */
+  object-fit: contain; /* Ensures the image fills the space properly */
+  border-radius: 8px;
+}
+
+/* Styling for the product info */
+.product-info {
+  padding: 10px;
+  position: relative;
+}
+
+.prod-category {
+  font-size: 14px;
+  color: #626571;
+}
+
+.prod-name {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: var(--black);
+  font-weight: 500;
+}
+
+.prod-price {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.actual-price {
+  font-size: 20px;
+  text-decoration: line-through;
+  color: #888;
+}
+
+.discounted-price {
+  color: var(--black);
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.discount-tag {
+  position: relative;
+  margin-left: 0.7rem;
+  border-radius: 4px;
+  top: 0;
+  right: auto;
+  min-height: auto;
+  line-height: 1;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #e00000;
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 15% 100%, 0% 50%);
+}
+
+.line {
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.prod-description {
+  margin-bottom: 1rem;
+  font-size: 15px;
+  color: #626571;
+}
+
+.weights {
+  display: flex;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+.weights strong {
+  margin-right: 1rem;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.weights .weight {
+  position: relative;
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  font-size: 14px;
+  margin-left: 1rem;
+  color: #626571;
+  cursor: pointer;
+}
+
+.weights .weight:hover {
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+.weights .weight .weight-unit {
+  text-transform: none;
+}
+
+/* Tooltip Styling */
+.weight::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #056c3c;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 25px;
+  font-size: 14px;
+  display: none;
+  white-space: nowrap;
+  text-transform: none;
+}
+
+/* Tooltip Arrow */
+.weight::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #056c3c transparent transparent transparent;
+  display: none;
+}
+
+/* Show tooltip and arrow on hover */
+.weight:hover::before {
+  display: block;
+  top: -35px;
+}
+
+.weight:hover::after {
+  display: block;
+  top: -8px;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center; /* Aligns elements vertically */
+  gap: 1rem; /* Adds spacing between the two divs */
+  margin: 1.5rem 0;
+}
+
+/* .quantity {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  overflow: hidden;
+  width: 120px;
+  justify-content: space-between;
+}
+
+.quantity button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  outline: none;
+}
+
+.quantity input {
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  outline: none;
+}
+
+.quantity button:hover {
+  background-color: #f0f0f0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
+
+.shop-butns {
+  display: flex;
+  gap: 10px;
+  /* margin-top: 15px; */
+}
+
+.shop-butn {
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.shop-butns .buy-now {
+  background-color: #fff;
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+
+.shop-butns .add-to-cart {
+  background-color: var(--green);
+  color: #fff;
+}
+
+.shop-butns .add-to-cart:hover {
+  background-color: var(--black);
+}
+
+.shop-butns .buy-now:hover {
+  background-color: var(--black);
+  color: #fff;
+  border: none;
+}
+
+/* Styling for the product features */
+.product-features {
+  padding: 10px;
+  background-color: #f7f7f7;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--black);
+  font-weight: 400;
+}
+
+.feature i {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #28a745;
+}
+
+.feature span {
+  color: #555;
+}
+
+.product-meta {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-meta .posted-in,
+.product-meta .dated-as,
+.product-meta .tag-container {
+  width: 50%;
+  display: flex;
+  gap: 5px;
+  /* margin-bottom: 15px; */
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.product-meta .tag-container{
+  width: 100%;
+  padding-top: 15px;
+}
+
+.product-meta .date,
+.product-meta a {
+  color: #626571;
+  font-weight: 400;
+}
+
+.product-meta a:hover {
+  color: var(--green);
+}
+
+.similar-products-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next row */
+  gap: 1rem; /* Space between items */
+  width: 100%;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding-top: 1rem;
+  overflow: hidden;
+}
+
+.similar-products-wrapper .item {
+  border: 0.1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 20%; /* Take full width inside the grid cell */
+  max-height: 314px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.add-to-wishlist {
+  padding: 5px 7px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.add-to-wishlist .uil-heart {
+  font-size: 20px;
+  color: var(--black);
+}
+
+.add-to-wishlist:hover {
+  background-color: var(--green);
+  color: #fff;
+}
+
+.add-to-wishlist:hover .uil-heart {
+  color: #fff;
+}
+
+.tabs{
+  display: flex;
+  justify-content: center;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid var(--green);
+  font-size: 20px;
+  color: var(--black);
+}
+
+.tab.active {
+  background: #0f784b;
+  color: white;
+  font-weight: bold;
+}
+.tab-content {
+  display: block;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+#reviews {
+  padding: 20px;
+  background-color: var(--background-light);
+  margin-top: 1rem;
+}
+
+.review{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+  transition: background 0.3s ease;
+}
+
+
+.review:not(:last-child){
+  border-bottom: 1px solid #ddd;
+  
+}
+
+.review img {
+  width: 50px;
+  height: 50px;
+  /* border-radius: 50%; */
+  /* border: 2px solid var(--primary-color); */
+}
+
+.review-content {
+  flex-grow: 1;
+}
+
+.review-content strong {
+  color: var(--text-dark);
+  font-size: 16px;
+}
+
+.review-content .review-date {
+  color: var(--secondary-color);
+  font-weight: 300;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.review-content .comment {
+  color: var(--text-light);
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.stars {
+  color: var(--star-color);
+  font-size: 12px;
+}
+
+
+
+/* review form start */
+
+.review-form {
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.review-form form .input-field{
+  width: 100%;
+}
+
+.review-form form input[type="text"],
+.review-form form input[type="email"],
+textarea{
+  padding: 20px;
+  width: 100%;
+  height: 45px;
+  font-size: 17px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  outline: none;
+}
+
+textarea{
+  resize: none;
+  height: 100px;
+}
+
+.row{
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  padding-top: .5rem;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: gold;
+}
+
+
+/* review form end */

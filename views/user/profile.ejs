@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groco : My Profile</title>
+
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/mini-cart.css" />
+    <link rel="stylesheet" href="/css/orders.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+
+    <link rel="stylesheet" href="/css/media.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+</head>
+
+<body class="profilePage subPage">
+
+    <%- include('../partials/header') %>
+    <%- include('../partials/mini-cart') %>
+
+    <div id="customPopup" class="popup">
+        <div class="popup-content">
+            <i class="fa-solid fa-check"></i>
+            <div class="message">
+                <span class="text text-1" id="text-1"></span>
+                <span class="text text-2" id="text-2"></span>
+            </div>
+            <span class="close-popup" id="popupCloseBtn">&times;</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="user">
+                <div class="avatar">
+                    <img src="/images/avatar.jpg" alt="User Avatar">
+                </div>
+                <div class="name">
+                    <span class="greeting">Hello,</span>
+                    <h3><%= typeof user !== 'undefined' && user ? user.first_name : 'Guest' %></h3>
+                </div>
+            </div>
+            <div class="menu-items">
+                <ul>
+                    <li class="menu-item active" onclick="setActive(this)" data-item="personal_info" data-page="personal_info">
+                        <i class="uil uil-user"></i>Personal Information
+                    </li>
+                    <li class="menu-item" onclick="setActive(this)" data-item="manage_addresses" data-page="manage_address">
+                        <i class="uil uil-home"></i>Manage Addresses
+                    </li>
+                    <!-- <li class="menu-item" onclick="setActive(this)" data-item="orders" data-page="profile_orders">
+                        <i class="uil uil-box"></i>Orders
+                    </li>
+                    <li class="menu-item" onclick="window.location.href='/logout'">
+                        <i class="uil uil-sign-out-alt"></i>Logout
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="content" id="content">
+            
+            </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/profile.js"></script>
+    <script src="/js/mini-cart.js"></script>
+
+</body>
+</html>

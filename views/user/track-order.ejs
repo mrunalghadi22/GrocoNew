@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order | Groco</title>
+    
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+  />
+</head>
+    <style>
+        .track-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-family: 'Poppins', sans-serif;
+        }
+        .track-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        /* The Timeline CSS */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 50px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #eee;
+            z-index: 1;
+        }
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        .step .icon {
+            width: 45px;
+            height: 45px;
+            background: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: #999;
+            font-size: 1.2rem;
+            border: 4px solid #fff;
+            transition: all 0.3s;
+        }
+        .step .text {
+            font-weight: 500;
+            color: #777;
+        }
+        
+        /* Active State Logic */
+        .step.active .icon {
+            background: #27ae60; /* Groco Green */
+            color: #fff;
+            box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.2);
+        }
+        .step.active .text {
+            color: #27ae60;
+        }
+        /* Color the line green behind active steps */
+        .timeline.progress-25::before { background: linear-gradient(to right, #27ae60 25%, #eee 25%); }
+        .timeline.progress-50::before { background: linear-gradient(to right, #27ae60 50%, #eee 50%); }
+        .timeline.progress-75::before { background: linear-gradient(to right, #27ae60 75%, #eee 75%); }
+        .timeline.progress-100::before { background: #27ae60; }
+        
+        .cancelled-alert {
+            background: #ffeaea;
+            color: #e74c3c;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body class="subPage">
+    <%- include('../partials/header') %>
+
+    <div class="track-container">
+        <div class="track-header">
+            <div>
+                <h2>Order #GROCO-<%= order._id.toString().slice(-6).toUpperCase() %></h2>
+                <p>Placed on: <%= new Date(order.createdAt).toLocaleDateString('en-IN') %></p>
+                
+                <% if (order.delivery_date && order.order_status !== 'Cancelled') { %>
+                    <p style="color: #27ae60; font-weight: 600; margin-top: 5px;">
+                        <i class="fa-solid fa-calendar-check"></i> Expected Delivery: <%= new Date(order.delivery_date).toLocaleDateString('en-IN') %>
+                    </p>
+                <% } %>
+                </div>
+            <div style="text-align: right;">
+                <h3>Total: ₹ <%= order.total_price %></h3>
+                <p>Via <%= order.payment_method.toUpperCase() %></p>
+            </div>
+        </div>
+
+        <% if (order.order_status === 'Cancelled') { %>
+            <div class="cancelled-alert">
+                <i class="fa-solid fa-circle-xmark"></i> This order was cancelled on <%= new Date(order.cancel_date || order.updatedAt).toLocaleDateString('en-IN') %>.
+            </div>
+        <% } else { %>
+            <% 
+                let progressClass = 'progress-25';
+                if (order.order_status === 'Accepted') progressClass = 'progress-50';
+                if (order.order_status === 'Shipped') progressClass = 'progress-75';
+                if (order.order_status === 'Delivered') progressClass = 'progress-100';
+            %>
+            
+            <div class="timeline <%= progressClass %>">
+                <div class="step active">
+                    <div class="icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <div class="text">Pending</div>
+                </div>
+                
+                <div class="step <%= ['Accepted', 'Shipped', 'Delivered'].includes(order.order_status) ? 'active' : '' %>">
+                    <div class="icon"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="text">Accepted</div>
+                </div>
+                
+                <div class="step <%= ['Shipped', 'Delivered'].includes(order.order_status) ? 'active' : '' %>">
+                    <div class="icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div class="text">Shipped</div>
+                </div>
+                
+                <div class="step <%= order.order_status === 'Delivered' ? 'active' : '' %>">
+                    <div class="icon"><i class="fa-solid fa-house-circle-check"></i></div>
+                    <div class="text">Delivered</div>
+                </div>
+            </div>
+        <% } %>
+
+        <a href="/orders" class="butn" style="display: block; width: 200px; margin: 0 auto; text-align: center; text-decoration: none; padding: 10px; background: #333; color: white; border-radius: 5px;">Back to Orders</a>
+    </div>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

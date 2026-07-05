@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groco : Admin Panel</title>
+
+    <link rel="stylesheet" href="/css/adminUtils.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/productList.css">
+    <link rel="stylesheet" href="/css/addProduct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="sidebar">
+            <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>groco</a>
+            <ul class="menu-items">
+                <li onclick="loadContent('/admin/api/orders', this)" data-menu="orders" class="item active">
+                    <a href="#" class="item-link"><i class="uil uil-archive"></i> Orders</a>
+                </li>
+                <li onclick="loadContent('/admin/api/products', this)" data-menu="productList" class="item">
+                    <a href="#" class="item-link"><i class="uil uil-clipboard-notes"></i> Product List</a>
+                </li>
+                <li onclick="loadContent('/admin/api/add-product', this)" data-menu="addProduct" class="item">
+                    <a href="#" class="item-link"><i class="uil uil-plus-circle"></i> Add Product</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h2 id="page-title">Orders</h2>
+                <div class="admin-btn">
+                    <i class="uil uil-user-circle"></i>
+                    <span>Admin</span>
+                </div>
+            </div>
+
+            <div class="content" id="content-area" style="padding: 20px;">
+                </div>
+        </div>
+    </div>
+
+   <script src="/js/admin.js"></script>
+</body>
+</html>

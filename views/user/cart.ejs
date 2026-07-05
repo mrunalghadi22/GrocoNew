@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groco : Cart</title>
+
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/mini-cart.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+
+<body class="cartPage subPage">
+
+    <div id="customPopup" class="popup">
+        <div class="popup-content">
+            <i class="fa-solid fa-check"></i>
+            <div class="message">
+                <span class="text text-1" id="text-1"></span>
+                <span class="text text-2" id="text-2"></span>
+            </div>
+            <span class="close-popup" id="popupCloseBtn">&times;</span>
+        </div>
+    </div>
+
+    <%- include('../partials/header') %>
+    <%- include('../partials/mini-cart') %>
+
+    <div class="main-container">
+        <div class="groco-cart">
+            <div class="row">
+                <div class="col-7">
+                    <% 
+                    
+                        let sub_total = 0;
+                        let num_of_items = 0;
+
+                        if (typeof cart !== 'undefined' && cart && cart.length > 0) { 
+                            num_of_items = cart.length;
+                    %>
+                        <form action="" class="gorco-cart-form" method="post">
+                            <table class="groco-cart-tabel">
+                                <thead>
+                                    <tr>
+                                        <th class="col_name">image</th>
+                                        <th class="col_name">product name</th>
+                                        <th class="col_name">price</th>
+                                        <th class="col_name">quantity</th>
+                                        <th class="col_name">Total</th>
+                                        <th class="col_name">remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cart-items">
+                                    <% cart.forEach(function(item) { 
+                                        let product = item.product;
+                                        
+                                        
+                                        let price = product.price || 0;
+                                        let discount = product.discount || 0;
+                                        let discount_price = price - (price * discount / 100);
+                                        let quantity = item.quantity || 1;
+                                        let total_price = discount_price * quantity;
+                                        
+                                        sub_total += total_price;
+                                        
+                                       
+                                        let image = (product.images && product.images.length > 0) ? product.images[0] : (product.image1 || '');
+                                    %>
+                                        <tr class="cart-item">
+                                            <td class="data">
+                                                <div class="prod-image">
+                                                    <img src="<%= image %>" alt="<%= product.name %>">
+                                                </div>
+                                            </td>
+                                            <td class="data">
+                                                <div class="prod-name"><span><%= product.name %></span></div>
+                                            </td>
+                                            <td class="data">
+                                                <div class="prod-price">
+                                                    <i class="uil uil-rupee-sign"></i>
+                                                    <p class="price" data-price="<%= discount_price.toFixed(2) %>">
+                                                        <%= Number(discount_price).toFixed(2) %>
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td class="data">
+                                                <div class="quantity">
+                                                    <button type="button" class="decrement">-</button>
+                                                    <input type="number" name="quantity" id="quantity"
+                                                        data-id="<%= item._id %>" class="quantity-input"
+                                                        value="<%= quantity %>" min="1">
+                                                    <button type="button" class="increment">+</button>
+                                                </div>
+                                            </td>
+                                            <td class="data">
+                                                <div class="prod-total-ammount">
+                                                    <i class="uil uil-rupee-sign"></i>
+                                                    <p class="total"><%= total_price.toFixed(2) %></p>
+                                                </div>
+                                            </td>
+                                            <td class="data">
+                                                <div class="prod-remove remove-from-cart">
+                                                    <button type="button" class="pro-rem-btn"
+                                                        onclick="removeCartItem(this)">&#10006</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="action" colspan="6">
+                                            <div class="action-butn-wrapper">
+                                                <div class="coupn">
+                                                    <input type="text" name="coupn_code" class="input-text" id="coupn_code"
+                                                        placeholder="Coupon Code">
+                                                    <button type="button" class="button" name="apply-coupn-btn">Apply Coupon</button>
+                                                </div>
+                                                <div class="update-cart">
+                                                    <button type="submit" class="button" name="update-cart-btn" disabled>Update Cart</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </form>
+                    <% } else { %>
+                        <div class="empty-cart-field">
+                            <div class="banner">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <div class="text">Your cart is currently empty.</div>
+                            </div>
+                            <div class="return-to-shop">
+                                <a href="/shopping" class="butn">Return To Shop</a>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+
+                <div class="col-3">
+                    <div class="cart-summary">
+                        <h3 class="title">Cart Summary</h3>
+                        <table class="cart-summary-table" cellspacing="0">
+                            <tbody>
+                                <tr class="items">
+                                    <th>Items</th>
+                                    <td data-title="items">
+                                        <span class="value"><%= num_of_items %></span>
+                                    </td>
+                                </tr>
+                                <tr class="subTotal">
+                                    <th>Sub Total</th>
+                                    <td data-title="subTotal">
+                                        <span class="value">
+                                            <i class="uil uil-rupee-sign"></i>
+                                            <%= sub_total.toFixed(2) %>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="dilivery-charges">
+                                    <th>Delivery Charges</th>
+                                    <td data-title="dilivery-charges">
+                                        <span class="value">
+                                            <i class="uil uil-rupee-sign"></i> 0.00
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="coupan-discount">
+                                    <th>Coupon Discount</th>
+                                    <td data-title="coupan-discount">
+                                        <span class="value">
+                                            <i class="uil uil-rupee-sign"></i> 0.00
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="total">
+                                    <th>Total</th>
+                                    <td data-title="total">
+                                        <span class="value">
+                                            <i class="uil uil-rupee-sign"></i>
+                                            <%= sub_total.toFixed(2) %>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="checkout-button button">
+                            <a href="/checkout" <%= sub_total === 0 ? 'style="pointer-events: none; opacity: 0.5;"' : '' %>>Proceed To Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/mini-cart.js"></script>
+
+</body>
+</html>

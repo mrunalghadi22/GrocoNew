@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groco : The Grocery Mart</title>
+    <link rel="stylesheet" href="/css/utils.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/mini-cart.css" />
+
+    <link rel="stylesheet" href="/css/media.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.css"
+      integrity="sha512-+1GzNJIJQ0SwHimHEEDQ0jbyQuglxEdmQmKsu8KI7QkMPAnyDrL9TAnVyLPEttcTxlnLVzaQgxv2FpLCLtli0A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+
+  <body class="mainPage">
+    <div id="customPopup" class="popup">
+      <div class="popup-content">
+        <i class="fa-solid fa-check"></i>
+        <div class="message">
+          <span class="text text-1" id="text-1">Success</span>
+          <span class="text text-2" id="text-2"
+            >Your profile has been updated.</span
+          >
+        </div>
+        <span class="close-popup" id="popupCloseBtn">&times;</span>
+      </div>
+    </div>
+
+    <div class="header" id="header">
+      <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>groco</a>
+      <div class="search-box">
+        <form action="/shopping" method="GET">
+          <input
+            type="text"
+            name="search"
+            class="search-input"
+            placeholder="Search for products..."
+            required
+          />
+          <button type="submit" class="search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="header-2">
+      <div id="menu-bar" class="fas fa-bars"></div>
+
+      <div class="menu">
+        <ul>
+          <li><a href="#home" class="nav-item">home</a></li>
+          <li><a href="#category" class="nav-item">category</a></li>
+          <li><a href="#deal" class="nav-item">deal</a></li>
+          <li><a href="#products" class="nav-item">products</a></li>
+          <li><a href="#contact" class="nav-item">contact</a></li>
+        </ul>
+      </div>
+
+      <div class="icons">
+        <div class="signUp-box" id="signUp-box">
+          <% if (typeof user !== 'undefined' && user) { %>
+          <div class="btn">
+            <i class="uil uil-user-circle"></i>
+            <span><%= user.name %></span>
+            <i class="uil uil-angle-down"></i>
+          </div>
+          <div class="dropdown">
+            <ul>
+              <li>
+                <a href="/profile">
+                  <i class="uil uil-user-circle"></i> My Profile
+                </a>
+              </li>
+              <li>
+                <a href="/orders"> <i class="uil uil-archive"></i> Orders </a>
+              </li>
+              <li>
+                <a href="/wishlist"> <i class="uil uil-heart"></i> Wishlist </a>
+              </li>
+              <li>
+                <a href="/logout">
+                  <i class="uil uil-sign-out-alt"></i> Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+          <% } else { %>
+          <div
+            class="btn login-link"
+            id="login-link"
+            name="loginLink"
+            onclick="openLogin()"
+          >
+            <i class="uil uil-user-circle"></i>
+            <span>Login</span>
+            <i class="uil uil-angle-down"></i>
+          </div>
+          <div class="dropdown">
+            <div class="sign-up" onclick="openSignUp()">
+              <span>New customer?</span>
+              <a href="#" class="sign-up-link" id="sign-up-link">Sign Up</a>
+            </div>
+            <ul>
+              <li>
+                <a href="/profile">
+                  <i class="uil uil-user-circle"></i> My Profile
+                </a>
+              </li>
+              <li>
+                <a href="/orders"> <i class="uil uil-archive"></i> Orders </a>
+              </li>
+              <li>
+                <a href="/wishlist"> <i class="uil uil-heart"></i> Wishlist </a>
+              </li>
+            </ul>
+          </div>
+          <% } %>
+        </div>
+
+        <div class="cart-box" id="cart-box">
+          <div class="btn cart-link">
+            <i class="uil uil-shopping-cart-alt"></i>
+            <span>cart</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../partials/mini-cart') %>
+
+    <section class="home" id="home">
+      <div class="left">
+        <img src="/images/hero.jpg" alt="" />
+      </div>
+      <div class="right">
+        <span>fresh and organic</span>
+        <h3>your daily need products</h3>
+        <a href="/shopping" class="butn">get started</a>
+      </div>
+    </section>
+    <section class="category" id="category">
+      <h1 class="heading">Shop By <span>Category</span></h1>
+      <div class="category_content_wrapper">
+        <div class="category_content">
+          <ul id="autoWidth" class="cs-hidden">
+            <% if (typeof categories !== 'undefined' && categories.length > 0) {
+            %> <% categories.forEach(function(cat, index) { %>
+            <li class="item-a">
+              <a
+                href="/shopping?category=<%= encodeURIComponent(cat.category_name) %>"
+                class="box box<%= index + 1 %>"
+              >
+                <img
+                  src="/images/<%= cat.cat_img %>"
+                  alt="<%= cat.category_name %>"
+                />
+                <p><%= cat.category_name %></p>
+              </a>
+            </li>
+            <% }) %> <% } else { %>
+            <p>No categories found.</p>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <% if (deals && deals.length > 0) { %> <% let deal_end_date =
+    deals[0].end_date; %>
+
+    <section class="deal" id="deal" data-enddate="<%= deal_end_date %>">
+      <div class="deal-content">
+        <h3 class="title">deal of the day</h3>
+
+        <div class="count-down">
+          <div class="box">
+            <h3 id="days">00</h3>
+            <span>days</span>
+          </div>
+
+          <div class="box">
+            <h3 id="hour">00</h3>
+            <span>hrs</span>
+          </div>
+
+          <div class="box">
+            <h3 id="minute">00</h3>
+            <span>mins</span>
+          </div>
+
+          <div class="box">
+            <h3 id="second">00</h3>
+            <span>sec</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="deal-banners">
+        <ul id="adaptive" class="cs-hidden">
+          <% deals.forEach(function(deal) { %> <% const product = deal.product;
+          const discounted_price = product.price - (product.price *
+          product.discount / 100); %>
+
+          <li class="item-a">
+            <div class="deal-banner">
+              <div class="deal-item">
+                <div class="img">
+                  <img
+                    src="<%= product.images[0] %>"
+                    alt="<%= product.name %>"
+                  />
+                </div>
+
+                <div class="daily-content">
+                  <span class="categoryName">
+                    <%= product.category.category_name %>
+                  </span>
+
+                  <h4 class="productName"><%= product.name %></h4>
+
+                  <p class="productPrice">
+                    Rs. <%= discounted_price.toFixed(2) %>
+
+                    <span class="actual-price">
+                      Rs. <%= product.price.toFixed(2) %>
+                    </span>
+
+                    <span class="discount"> -<%= product.discount %>% </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <% }) %>
+        </ul>
+      </div>
+    </section>
+
+    <script>
+      document
+        .getElementById("deal")
+        .setAttribute("data-enddate", "<%= deal_end_date %>");
+
+      document.addEventListener("DOMContentLoaded", () => {
+        
+        const dealSection = document.getElementById("deal");
+        if (!dealSection) return; 
+
+        const endDateStr = dealSection.getAttribute("data-enddate");
+        if (!endDateStr) return; 
+
+       
+        const countDownDate = new Date(endDateStr).getTime();
+
+       
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hour");
+        const minutesEl = document.getElementById("minute");
+        const secondsEl = document.getElementById("second");
+
+      
+        const timer = setInterval(() => {
+        
+          const now = new Date().getTime();
+
+          
+          const distance = countDownDate - now;
+
+        
+          if (distance < 0) {
+            clearInterval(timer);
+            daysEl.innerText = "00";
+            hoursEl.innerText = "00";
+            minutesEl.innerText = "00";
+            secondsEl.innerText = "00";
+            return;
+          }
+
+         
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          
+          daysEl.innerText = days < 10 ? "0" + days : days;
+          hoursEl.innerText = hours < 10 ? "0" + hours : hours;
+          minutesEl.innerText = minutes < 10 ? "0" + minutes : minutes;
+          secondsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+      });
+    </script>
+
+    <% } else { %>
+    <section class="deal" id="deal-end">
+      <div class="deal-content">
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+            width: 100%;
+          "
+        >
+          <div style="text-align: center">
+            <h2 style="font-size: 35px; color: #e74c3c; margin-bottom: 15px">
+              Deal Ended!
+            </h2>
+
+            <p style="font-size: 18px; color: #666">
+              Today's deal has expired.
+            </p>
+
+            <p style="font-size: 16px; color: #999; margin-top: 10px">
+              Come back tomorrow for exciting new offers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <% } %>
+
+    <section class="products" id="products">
+      <h1 class="heading">Latest <span>Products</span></h1>
+
+      <div class="products-container">
+        <% if (products && products.length > 0) { %> <%
+        products.forEach(function(product){ %> <% let discountedPrice =
+        product.price; %> <% if(product.discount > 0){ %> <% discountedPrice =
+        product.price - (product.price * product.discount / 100); %> <% } %>
+
+        <div class="item" onclick="redirectToProduct('<%= product._id %>')">
+          <div class="actions">
+            <div
+              class="add-to-wishlist action_btn"
+              data-tooltip="Add To Wishlist"
+              data-id="<%= product._id %>"
+              onclick="addToWishlist(event,this)"
+            >
+              <i class="fa-regular fa-heart"></i>
+            </div>
+
+            <div class="view-product action_btn" data-tooltip="View Product">
+              <a href="/product/<%= product._id %>" target="_blank">
+                <i class="fa-solid fa-eye"></i>
+              </a>
+            </div>
+          </div>
+
+          <span class="categoryName">
+            <%= product.category ? product.category.category_name : '' %>
+          </span>
+
+          <div class="image">
+            <img
+              src="<%= product.images.length ? product.images[0] : '/images/no-image.png' %>"
+              alt="<%= product.name %>"
+            />
+          </div>
+
+          <p class="productPrice">
+            <% if(product.discount > 0){ %>
+            <del>₹ <%= product.price.toFixed(2) %></del>
+            <% } %> ₹ <%= discountedPrice.toFixed(2) %> <% if(product.discount >
+            0){ %>
+            <span class="discount-tag">-<%= product.discount %>%</span>
+            <% } %>
+          </p>
+
+          <h4 class="productName"><%= product.name %></h4>
+
+          <% if (product.stock > 0) { %>
+          <button
+            class="cartButn add-to-cart"
+            data-id="<%= product._id %>"
+            onclick="sendProductDetails(event, this)"
+          >
+            <i class="fa fa-basket-shopping"></i>
+            <span>Add to cart</span>
+          </button>
+          <% } else { %>
+          <button
+            class="cartButn add-to-cart"
+            disabled
+            style="
+              background-color: #cccccc;
+              border-color: #cccccc;
+              color: #666666;
+              cursor: not-allowed;
+            "
+          >
+            <i class="fa fa-ban"></i>
+            <span>Out of stock</span>
+          </button>
+          <% } %>
+        </div>
+
+        <% }) %> <% } else { %>
+
+        <p>No products found.</p>
+
+        <% } %>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <h1 class="heading">contact <span>us</span></h1>
+      <div class="contact_content">
+        <div class="contact-info">
+          <h3 class="title">how can we help you ?</h3>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nemo
+            repellendus dicta velit temporibus corporis odit esse est, eos
+            impedit?
+          </p>
+
+          <div class="contact-data">
+            <div class="contact-icon">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="text">
+              <strong> Phone</strong>
+              <p>+1 238 333 44 55</p>
+            </div>
+          </div>
+
+          <div class="contact-data">
+            <div class="contact-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="text">
+              <strong>Location</strong>
+              <p>55 Main Street, The grand avenue 2nd block, new york city</p>
+            </div>
+          </div>
+
+          <div class="contact-data">
+            <div class="contact-icon">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="text">
+              <strong>Email</strong>
+              <p>sample@123gmail.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h4 class="form-title">We value your feedback!</h4>
+
+          <form>
+            <div class="input-field">
+              <textarea
+                id="feedback-message"
+                cols="80"
+                rows="5"
+                placeholder="Tell us what you think about Groco..."
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="butn mButtn"
+              onclick="sendFeedback(event)"
+            >
+              Submit Feedback
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="box-container">
+        <div class="box">
+          <a href="" class="logo"
+            ><i class="fas fa-shopping-basket"></i>groco</a
+          >
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+            neque in voluptatem unde.
+          </p>
+          <div class="social-media">
+            <a href="#" class="butn fab fa-facebook-f"></a>
+            <a href="#" class="butn fab fa-twitter"></a>
+            <a href="#" class="butn fab fa-instagram"></a>
+            <a href="#" class="butn fab fa-linkedin"></a>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>our locations</h3>
+          <ul>
+            <li><a href="#">India</a></li>
+            <li><a href="#">USA</a></li>
+            <li><a href="#">France</a></li>
+            <li><a href="#">Japan</a></li>
+            <li><a href="#">Russia</a></li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>quick links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#category">Category</a></li>
+            <li><a href="#product">Products</a></li>
+            <li><a href="#deal">Deal</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>download app</h3>
+          <ul>
+            <li><a href="#">Google play</a></li>
+            <li><a href="#">window xp</a></li>
+            <li><a href="#">app store</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">&copy;copyright reserved</div>
+    </section>
+
+    <script src="/js/function.js"></script>
+    <script src="/js/mini-cart.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"
+      integrity="sha512-Gfrxsz93rxFuB7KSYlln3wFqBaXUc1jtt3dGCp+2jTb563qYvnUBM/GP2ZUtRC27STN/zUamFtVFAIsRFoT6/w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#autoWidth").lightSlider({
+          autoWidth: true,
+          loop: true,
+          onSliderLoad: function () {
+            $("#autoWidth").removeClass("cS-hidden");
+          },
+        });
+      });
+
+      $(document).ready(function () {
+        $("#adaptive").lightSlider({
+          adaptiveHeight: true,
+          item: 1,
+          slideMargin: 0,
+          loop: true,
+        });
+      });
+    </script>
+  </body>
+</html>

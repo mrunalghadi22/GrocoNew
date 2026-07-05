@@ -1,0 +1,215 @@
+/* Layout Styles */
+.admin-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar (Fixed Left) */
+.sidebar {
+  width: 250px;
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  /* padding-top: 20px; */
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar .logo {
+  /* background-color: red; */
+  display: flex;
+  font-size: 2rem;
+  font-weight: bolder;
+  padding: 12px 12px 12px 28px;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.sidebar .logo i {
+  padding-right: 0.5rem;
+  color: var(--green);
+}
+
+.sidebar ul {
+  /* background-color: red; */
+  padding-top: 30px;
+}
+
+.sidebar ul li {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 28px;
+}
+
+.sidebar ul li a {
+  font-size: 1.3rem;
+  color: var(--black);
+}
+
+.sidebar ul li:hover,
+.sidebar .menu-items .item.active {
+  background-color: #f3f9f5;
+}
+
+.sidebar ul li:hover a,
+.sidebar .menu-items .item.active a {
+  color: var(--green);
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 250px; /* Same width as sidebar */
+  width: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header */
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header h2 {
+  font-size: 1.5rem;
+  color: var(--black);
+}
+
+.admin-btn {
+  background: var(--green);
+  color: #fff;
+  padding: 5px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-btn i {
+  font-size: 23px;
+}
+
+.admin-btn span {
+  font-size: 18px;
+}
+
+.admin-btn:hover {
+  background: var(--black);
+}
+
+/* Content Area */
+.content {
+  position: relative;
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #f7f7f7;
+}
+
+.message-box {
+  position: fixed;
+  top: 73px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: var(--green);
+  font-weight: bold;
+  font-size: 16px;
+  display: block; /* Initially hidden */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.success {
+  background-color: #28a745;
+} /* Green for success */
+.error {
+  background-color: #dc3545;
+} /* Red for errors */
+
+.order {
+  display: flex;
+  gap: 2rem;
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--black); /* Dark gray for readability */
+  background-color: #fff; /* Ensures good contrast */
+  margin-bottom: 1rem;
+}
+
+.order .box {
+  padding: 0 10px;
+}
+
+.order .box img {
+  height: 90px;
+  width: 90px;
+  /* padding: 2px; */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.order .row {
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.order-content {
+  width: 100%;
+}
+
+/* Adjust specific text colors */
+.order-id,
+.total-items,
+.total-payment,
+.payment-method,
+.payment-status,
+.order-date,
+.order-status select,
+.delivery-address .address {
+  color: var(--black); /* Slightly darker gray */
+}
+
+.order-id {
+  font-weight: bold;
+}
+/* Order status dropdown */
+.order-status select {
+  width: 140px;
+  background-color: #f9f9f9;
+  color: #222;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/* Style order items */
+.order-items .order-item {
+  font-weight: 500;
+  padding-bottom: 10px;
+  width: 450px; /* Limit the width */
+  white-space: nowrap; /* Prevent line break */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add dots if text overflows */
+}
+
+/* Delivery address text */
+.delivery-address .address {
+  /* display: flex;
+ flex-direction: column; */
+}
+
+/* Phone number */
+.phn-num {
+  font-weight: bold;
+  /* color: #007bff;  */
+}
