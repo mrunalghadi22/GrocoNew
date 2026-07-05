@@ -5,6 +5,7 @@ const session = require('express-session');
 const connectMongoRaw = require('connect-mongo');
 // const expressLayouts = require("express-ejs-layouts");
 
+dotenv.config();
 
 const authRoutes = require("./routes/authRoutes");
 const homeRoutes = require("./routes/homeRoutes");
@@ -22,7 +23,7 @@ const adminRoutes = require('./routes/adminRoutes');
 
 
 
-dotenv.config();
+
 
 const connectDB = require("./config/db");
 
