@@ -7,7 +7,7 @@ const profilePage = async (req, res) => {
       return res.redirect("/login");
     }
 
-    // const user = await User.findById(req.session.user.id);
+    const user = await User.findById(req.session.user.id);
 
     console.log(user)
 
