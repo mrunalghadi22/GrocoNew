@@ -1,5 +1,6 @@
 const Cart = require("../models/Cart");
 const Category = require("../models/Category");
+const Product = require("../models/Product");
 
 const miniCart = async (req, res) => {
   const cart = await Cart.find({
