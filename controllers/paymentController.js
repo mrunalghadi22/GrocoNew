@@ -5,8 +5,8 @@ const Cart = require("../models/Cart");
 const Product = require("../models/Product");
 
 const razorpayInstance = new Razorpay({
-  key_id: "rzp_test_T8z7oBF8O1q63p",
-  key_secret: "JU5q1L9otBfE4zFk0PiGnab2",
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 const expectedDelivery = new Date();
